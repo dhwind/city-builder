@@ -1,1 +1,14 @@
-{}
+{
+  "builder": {
+    "add": "Add Building",
+    "buildings": "Buildings",
+    "noBuildings": "No buildings available"
+  },
+  "metadata": {
+    "homepage": {
+      "description": "City Builder is a sandbox where you can build your own city",
+      "keywords": "city, builder, sandbox, game, build, city builder",
+      "title": "City Builder - Build your city"
+    }
+  }
+}
