@@ -1,0 +1,10 @@
+{
+  "arrowParens": "avoid",
+  "jsonRecursiveSort": true,
+  "jsonSortOrder": "{ \"placeThisFirst\": null, \"/^[^\\\\d+]/\": \"lexical\", \"/^1\\\\d+/\": \"numeric\", \"/^\\\\d+/\": \"numeric\" }",
+  "plugins": ["prettier-plugin-sort-json"],
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "all"
+}

@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# City Builder Project
 
-## Getting Started
+## Task Breakdown
 
-First, run the development server:
+### 1. Project Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Initialize Next.js project
+- Set up Tailwind CSS
+- Configure React Query
+- Set up Git repository
+- Create initial project structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Estimated Time:** 2 hours
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Customize Houses
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Create bulding cards
+- Create buildings content blocks
+- Draw buildings (pixel art)
+- Implement functionality to adjust attributes like color, number of floors, floors color, building type and name
+- Add form validation (min max floors, etc.)
 
-## Learn More
+**Estimated Time:** 6 hours
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Manage Houses
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Implement functionality to add new houses
+- Implement functionality to change using drag & drop building/cards position
+- Implement functionality to remove houses
+- Use state manager to save the current state of the application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Estimated Time:** 6 hours
 
-## Deploy on Vercel
+### 4. Display Weather
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Draw weather (sun, rain, snow, day, night) (pixel art)
+- Integrate weather API to fetch current weather data based on selected location (Sofia, New York, Tokyo)
+- Create components to display weather state (sun, rain, snow, day, night)
+- Display current temperature
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Estimated Time:** 7 hours
+
+### 5. Performance & Scalability
+
+- Optimize components for performance
+- Ensure scalability of the solution
+
+**Estimated Time:** 3 hours
+
+### 6. Browser Compatibility
+
+- Test and ensure compatibility with the last two versions of modern browsers
+
+**Estimated Time:** 2 hours
+
+### 7. Documentation
+
+- Write documentation for the project
+- Include instructions on how to set up and run the project
+
+**Estimated Time:** 2 hours
+
+### 8. Write Tests
+
+- Write and include tests to ensure the reliability of the solution
+
+**Estimated Time:** 3 hours
+
+## Total Estimated Time: 31 hours
