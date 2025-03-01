@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import Builder from '@/features/builder';
 
 type Params = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: Params): Promise<{

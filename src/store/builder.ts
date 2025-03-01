@@ -7,6 +7,7 @@ type BuilderState = {
   buildings: Building[];
   addBuilding: (building: Building) => void;
   removeBuilding: (uuid: string) => void;
+  setBuildings: (buildings: Building[]) => void;
 };
 
 type CurrentStore = Store & BuilderState;
@@ -27,6 +28,11 @@ const useBuilderStore = create<CurrentStore>()(
           buildings: state.buildings.filter(building => building.uuid !== uuid),
         })),
       setPending: value => set({ pending: value }),
+      setBuildings: (buildings: Building[]) =>
+        set(state => ({
+          ...state,
+          buildings,
+        })),
     }),
     {
       name: 'builder-storage',

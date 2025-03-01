@@ -1,11 +1,10 @@
 import React from 'react';
-import pick from 'lodash/pick';
 import { Roboto } from 'next/font/google';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
 import ReactQueryProvider from '@/providers/react-query';
 
 import '@/styles/globals.css';
 
+import ClientTranslationsProvider from '@/providers/client-translations';
 import Header from './header';
 
 const roboto = Roboto({
@@ -15,23 +14,15 @@ const roboto = Roboto({
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>;
 
-const RootLayout: React.FC<RootLayoutProps> = ({
-  children,
-  params: { locale },
-}) => {
-  const messages = useMessages();
+const RootLayout: React.FC<RootLayoutProps> = async ({ children, params }) => {
+  const { locale } = await params;
 
   return (
     <ReactQueryProvider>
-      <NextIntlClientProvider
-        messages={
-          // … and provide the relevant messages
-          pick(messages, 'builder')
-        }
-      >
+      <ClientTranslationsProvider>
         <html lang={locale}>
           <body className={`${roboto.variable} antialiased`}>
             <Header />
@@ -40,7 +31,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
             </main>
           </body>
         </html>
-      </NextIntlClientProvider>
+      </ClientTranslationsProvider>
     </ReactQueryProvider>
   );
 };

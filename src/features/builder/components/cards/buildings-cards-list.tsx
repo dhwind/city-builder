@@ -3,19 +3,22 @@
 import { House } from 'lucide-react';
 
 import { useTranslations } from 'next-intl';
-import BuildingsCardItem from './buildings-card-item';
+import { UniqueIdentifier } from '@dnd-kit/core';
+import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useBuilderStore } from '@/store/builder';
 import { Button } from '@/components/ui/button';
 import { generateUUID } from '@/utils/uuid';
 import { builderConfig } from '@/config/builder';
 import LoaderLayout from '@/layouts/loader';
+import DndSort from '@/providers/dnd-sort';
+import BuildingsCardItem from './buildings-card-item';
 
 const BuildingsCardsList: React.FC = () => {
   const t = useTranslations('builder');
 
-  const { buildings, pending, addBuilding } = useBuilderStore();
+  const { buildings, pending, addBuilding, setBuildings } = useBuilderStore();
 
-  console.log(addBuilding);
+  const buildingsUuids = buildings.map(b => b.uuid);
 
   const handleAddNewBuilding = () => {
     addBuilding({
@@ -27,25 +30,53 @@ const BuildingsCardsList: React.FC = () => {
     });
   };
 
+  const renderActiveCardOverlay = (activeBuildingUuid: UniqueIdentifier) => {
+    const activeBuilding = buildings.find(b => b.uuid === activeBuildingUuid)!;
+
+    return <BuildingsCardItem building={activeBuilding} />;
+  };
+
+  const handleBuildingCardsDragEnd = (
+    sortedBuildingsUuids: UniqueIdentifier[],
+  ) => {
+    const newBuildings = sortedBuildingsUuids
+      .map(uuid => buildings.find(b => b.uuid === uuid))
+      .filter(b => !!b);
+
+    setBuildings(newBuildings);
+  };
+
   return (
     <section id="buildings-cards" className="col-span-1">
-      <div className="w-full max-h-[600px] h-[600px] border rounded flex flex-col">
+      <div className="border rounded">
         <div className="w-full bg-gray-100 px-6 py-3 font-bold">
           {t('buildings')}
         </div>
-        <LoaderLayout isLoading={pending}>
-          {buildings?.length > 0 ? (
-            <ul>
-              {buildings!.map(building => (
-                <BuildingsCardItem key={building.uuid} building={building} />
-              ))}
-            </ul>
-          ) : (
-            <div className="flex text-center justify-center align-center px-6 py-3 ">
-              {t('noBuildings')}
-            </div>
-          )}
-        </LoaderLayout>
+        <div className="w-full max-h-[600px] h-[600px] overflow-y-auto overflow-x-hidden relative p-2">
+          <LoaderLayout isLoading={pending}>
+            <DndSort
+              items={buildingsUuids}
+              strategy={verticalListSortingStrategy}
+              renderActiveItem={renderActiveCardOverlay}
+              onDragEndHandler={handleBuildingCardsDragEnd}
+            >
+              {buildings.length > 0 ? (
+                <ul className="flex flex-col gap-y-2 ">
+                  {buildings?.map(building => (
+                    <BuildingsCardItem
+                      key={building.uuid}
+                      building={building}
+                    />
+                  ))}
+                </ul>
+              ) : (
+                <div className="flex text-center justify-center align-center px-6 py-3 ">
+                  {t('noBuildings')}
+                </div>
+              )}
+            </DndSort>
+          </LoaderLayout>
+        </div>
       </div>
       <div className="flex justify-center align-center mt-auto bg-gray-100 px-6 py-3 ">
         <Button variant="outline" onClick={handleAddNewBuilding}>

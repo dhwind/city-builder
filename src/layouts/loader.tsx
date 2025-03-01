@@ -29,7 +29,10 @@ const LoaderLayout: React.FC<ComponentProps> = ({
     <>
       {isLoading ? (
         <div
-          className={cn('flex items-center justify-center gap-x-2', className)}
+          className={cn(
+            'flex items-center justify-center gap-x-2 p-2',
+            className,
+          )}
         >
           <Spinner size={size} />
           {message ? <div>{t(message)}</div> : ''}
