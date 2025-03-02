@@ -5,6 +5,7 @@ import ReactQueryProvider from '@/providers/react-query';
 import '@/styles/globals.css';
 
 import ClientTranslationsProvider from '@/providers/client-translations';
+import { Toaster } from '@/components/ui/sonner';
 import Header from './header';
 
 const roboto = Roboto({
@@ -29,6 +30,7 @@ const RootLayout: React.FC<RootLayoutProps> = async ({ children, params }) => {
             <main className="w-full p-3 flex justify-center items-center md:px-12 md:py-6">
               <div className="w-full max-w-screen-2xl">{children}</div>
             </main>
+            <Toaster />
           </body>
         </html>
       </ClientTranslationsProvider>

@@ -4,6 +4,53 @@
     "buildings": "Сгради",
     "noBuildings": "Няма налични сгради"
   },
+  "common": {
+    "open": "Отвори"
+  },
+  "fields": {
+    "color": {
+      "labels": {
+        "blue": "Син",
+        "green": "Зелен",
+        "orange": "Оранжев",
+        "red": "Червен",
+        "title": "Цвят:",
+        "yellow": "Жълт"
+      },
+      "success": {
+        "info": "Цветът е успешно обновен!"
+      }
+    },
+    "floor": {
+      "error": {
+        "max": "Сградата трябва да има максимум {symbolsCount} етажа!",
+        "min": "Сградата трябва да има минимум {symbolsCount} етажа!"
+      },
+      "labels": {
+        "title": "Етажи:"
+      }
+    },
+    "name": {
+      "error": {
+        "max": "Името трябва да бъде най-много {symbolsCount} символа",
+        "min": "Името трябва да бъде поне {symbolsCount} символа"
+      },
+      "success": {
+        "info": "Името е успешно обновено!"
+      }
+    },
+    "type": {
+      "labels": {
+        "apartments": "Апартаменти",
+        "house": "Къща",
+        "office": "Офис",
+        "title": "Тип:"
+      },
+      "success": {
+        "info": "Типът е успешно обновен!"
+      }
+    }
+  },
   "metadata": {
     "homepage": {
       "description": "City Builder е пясъчник, където можете да построите своя собствен град",

@@ -1,6 +1,7 @@
 export type Floor = {
   color: Color;
-  uuid: number;
+  uuid: string;
+  name: string;
   order: number;
 };
 

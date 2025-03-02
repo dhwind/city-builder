@@ -5,45 +5,64 @@ import { House } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { useBuilderStore } from '@/store/builder';
+import { useShallow } from 'zustand/react/shallow';
 import { Button } from '@/components/ui/button';
 import { generateUUID } from '@/utils/uuid';
 import { builderConfig } from '@/config/builder';
 import LoaderLayout from '@/layouts/loader';
-import DndSort from '@/providers/dnd-sort';
+import DndSort from '@/layouts/dnd-sort';
+import { useBuilderStore } from '@/store/builder';
+import { Floor } from '@/types/builder';
 import BuildingsCardItem from './buildings-card-item';
 
 const BuildingsCardsList: React.FC = () => {
   const t = useTranslations('builder');
 
-  const { buildings, pending, addBuilding, setBuildings } = useBuilderStore();
+  const { buildings, pending, addBuilding, sortBuildings } = useBuilderStore(
+    useShallow(state => ({
+      buildings: state.buildings,
+      pending: state.pending,
+      addBuilding: state.addBuilding,
+      sortBuildings: state.sortBuildings,
+    })),
+  );
 
   const buildingsUuids = buildings.map(b => b.uuid);
 
   const handleAddNewBuilding = () => {
+    const defaultBuildingType = builderConfig.defaultType;
+    const defaultBuildingColor = builderConfig.defaultColor;
+
+    const floors: Floor[] = Array.from({
+      length: builderConfig[defaultBuildingType].min.length,
+    }).map((_, index) => {
+      return {
+        uuid: generateUUID('floor'),
+        color: defaultBuildingColor,
+        name: `Floor ${index + 1}`,
+        order: index + 1,
+      };
+    });
+
     addBuilding({
       uuid: generateUUID('building'),
       name: `Building ${buildings ? buildings!.length + 1 : ''}`,
-      type: builderConfig.defaultType,
-      floors: [],
-      color: builderConfig.defaultColor,
+      type: defaultBuildingType,
+      color: defaultBuildingColor,
+      floors,
     });
   };
 
   const renderActiveCardOverlay = (activeBuildingUuid: UniqueIdentifier) => {
     const activeBuilding = buildings.find(b => b.uuid === activeBuildingUuid)!;
 
-    return <BuildingsCardItem building={activeBuilding} />;
+    return <BuildingsCardItem building={activeBuilding} active />;
   };
 
   const handleBuildingCardsDragEnd = (
     sortedBuildingsUuids: UniqueIdentifier[],
   ) => {
-    const newBuildings = sortedBuildingsUuids
-      .map(uuid => buildings.find(b => b.uuid === uuid))
-      .filter(b => !!b);
-
-    setBuildings(newBuildings);
+    sortBuildings(sortedBuildingsUuids);
   };
 
   return (
@@ -52,7 +71,7 @@ const BuildingsCardsList: React.FC = () => {
         <div className="w-full bg-gray-100 px-6 py-3 font-bold">
           {t('buildings')}
         </div>
-        <div className="w-full max-h-[600px] h-[600px] overflow-y-auto overflow-x-hidden relative p-2">
+        <div className="w-full scrollbar-thin max-h-[600px] h-[600px] overflow-y-auto overflow-x-hidden relative p-2">
           <LoaderLayout isLoading={pending}>
             <DndSort
               items={buildingsUuids}

@@ -30,23 +30,24 @@ const loaderVariants = cva('animate-spin text-text', {
   },
 });
 
-interface SpinnerContentProps
-  extends VariantProps<typeof spinnerVariants>,
-    VariantProps<typeof loaderVariants> {
-  children?: React.ReactNode;
-  className?: string;
-}
+type SpinnerContentProps = VariantProps<typeof spinnerVariants> &
+  VariantProps<typeof loaderVariants> & {
+    children?: React.ReactNode;
+    className?: string;
+  };
 
-export function Spinner({
+const Spinner: React.FC<SpinnerContentProps> = ({
   size,
   show,
   children,
   className,
-}: SpinnerContentProps) {
+}) => {
   return (
     <span className={spinnerVariants({ show })}>
       <Loader2 className={cn(loaderVariants({ size }), className)} />
       {children}
     </span>
   );
-}
+};
+
+export { Spinner };

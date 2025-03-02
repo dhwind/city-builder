@@ -4,6 +4,53 @@
     "buildings": "Buildings",
     "noBuildings": "No buildings available"
   },
+  "common": {
+    "open": "Open"
+  },
+  "fields": {
+    "color": {
+      "labels": {
+        "blue": "Blue",
+        "green": "Green",
+        "orange": "Orange",
+        "red": "Red",
+        "title": "Color:",
+        "yellow": "Yellow"
+      },
+      "success": {
+        "info": "Successfully updated color!"
+      }
+    },
+    "floor": {
+      "error": {
+        "max": "Building should have maximum {symbolsCount} floors!",
+        "min": "Building should have minimum {symbolsCount} floors!"
+      },
+      "labels": {
+        "title": "Floors:"
+      }
+    },
+    "name": {
+      "error": {
+        "max": "Name must be at most {symbolsCount} characters long",
+        "min": "Name must be at least {symbolsCount} characters long"
+      },
+      "success": {
+        "info": "Successfully updated name!"
+      }
+    },
+    "type": {
+      "labels": {
+        "apartments": "Apartments",
+        "house": "House",
+        "office": "Office",
+        "title": "Type:"
+      },
+      "success": {
+        "info": "Successfully updated type!"
+      }
+    }
+  },
   "metadata": {
     "homepage": {
       "description": "City Builder is a sandbox where you can build your own city",
