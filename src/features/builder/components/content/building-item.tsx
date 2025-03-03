@@ -1,15 +1,15 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import DynamicImage from '@/components/dynamic-image';
 import { Building } from '@/types/builder';
 import { buildingFloorsTilesRes } from '@/config/builder';
 import SortableItem from '@/layouts/sortable-item';
 import { useBuilderStore } from '@/store/builder';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/utils/date';
+import BuildingFloor from './building-floor';
 
 type ComponentProps = {
   building: Building;
@@ -27,6 +27,18 @@ const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
   );
 
   const tiles = buildingFloorsTilesRes[building.type];
+
+  const floorsList = useMemo(() => {
+    return Object.values(building.floors).map((floor, i, arr) => (
+      <BuildingFloor
+        key={floor.uuid}
+        floor={floor}
+        floorsCount={arr.length}
+        buildingName={building.name}
+        tiles={tiles}
+      />
+    ));
+  }, [building.floors, tiles, building.name]);
 
   const handleRemoveBuilding = useCallback(() => {
     try {
@@ -71,33 +83,7 @@ const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
       handleHover={(hovered: boolean) => setItemHovered(hovered)}
     >
       <div className="flex flex-col-reverse items-center relative -mb-1">
-        {building.floors.map((floor, i, arr) => {
-          const floorTiles = tiles[floor.color];
-          let tileRes = '';
-
-          if (floor.order === 1) {
-            tileRes =
-              arr.length > 1 ? floorTiles.initial : floorTiles.initial1Floor!;
-          } else if (floor.order === arr.length) {
-            tileRes = floorTiles.roof;
-          } else {
-            tileRes = floorTiles.middle;
-          }
-
-          return (
-            <div
-              key={floor.uuid}
-              className="px-4 flex justify-center w-auto h-auto min-w-[200px] cursor-pointer hover:bg-gray-100 hover:border-y"
-            >
-              <DynamicImage
-                src={tileRes}
-                width={tiles.tileImgWidth}
-                className="hover:opacity-85"
-                alt={`${building.name} floor`}
-              />
-            </div>
-          );
-        })}
+        {floorsList}
         <Button
           variant="default"
           onClick={handleRemoveBuilding}

@@ -131,7 +131,7 @@ type BuildingColorRes = {
   roof: string;
 };
 
-type BuildingRes = {
+export type BuildingRes = {
   tileImgWidth: number;
   orange: BuildingColorRes;
   red: BuildingColorRes;
