@@ -1,1 +1,78 @@
-{}
+{
+  "builder": {
+    "add": "Add Building",
+    "buildings": "Buildings",
+    "noBuildings": "No buildings available",
+    "panel": "Buildings Panel"
+  },
+  "common": {
+    "open": "Open"
+  },
+  "fields": {
+    "color": {
+      "error": {
+        "message": "Couldn't update color for building {buildingName}!"
+      },
+      "labels": {
+        "blue": "Blue",
+        "green": "Green",
+        "orange": "Orange",
+        "red": "Red",
+        "title": "Color:",
+        "yellow": "Yellow"
+      },
+      "success": {
+        "message": "Successfully updated color for building {buildingName}!"
+      }
+    },
+    "floor": {
+      "error": {
+        "max": "{type} can have maximum {symbolsCount} floors!",
+        "message": "Couldn't add/remove a floor for building {buildingName}!",
+        "min": "{type} can have minimum {symbolsCount} floors!"
+      },
+      "labels": {
+        "title": "Floors:"
+      }
+    },
+    "name": {
+      "error": {
+        "max": "Name must be at most {symbolsCount} characters long",
+        "message": "Couldn't change name for building {buildingName}!",
+        "min": "Name must be at least {symbolsCount} characters long"
+      },
+      "success": {
+        "message": "Successfully updated name from {buildingOldName} to {buildingName}!"
+      }
+    },
+    "remove": {
+      "error": {
+        "message": "Couldn't remove building {buildingName}!"
+      },
+      "success": {
+        "message": "Building {buildingName} was removed!"
+      }
+    },
+    "type": {
+      "error": {
+        "message": "Couldn't change a type for building {buildingName}!"
+      },
+      "labels": {
+        "apartments": "Apartments",
+        "house": "House",
+        "office": "Office",
+        "title": "Type:"
+      },
+      "success": {
+        "message": "Successfully updated type of building {buildingName}!"
+      }
+    }
+  },
+  "metadata": {
+    "homepage": {
+      "description": "City Builder is a sandbox where you can build your own city",
+      "keywords": "city, builder, sandbox, game, build, city builder",
+      "title": "City Builder - Build your city"
+    }
+  }
+}

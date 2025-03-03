@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import tailwindCssAnimate from 'tailwindcss-animate';
 
 const config = {
   darkMode: ['class', 'dark'],
@@ -15,7 +16,10 @@ const config = {
       padding: '2rem',
     },
     extend: {
-      colors: {},
+      colors: {
+        red: 'hsl(var(--red))',
+        'pinkish-orange': 'hsl(var(--pinkish-orange))',
+      },
       borderRadius: {},
       keyframes: {
         'accordion-down': {
@@ -33,7 +37,7 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [tailwindCssAnimate],
 } satisfies Config;
 
 export default config;

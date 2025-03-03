@@ -1,10 +1,10 @@
 /**
- * Formats a date to a readable string.
+ * Formats a date to a readable string with time.
  * @param date - The date to format.
  * @param locale - The locale to use for formatting.
  * @returns The formatted date string.
  */
-export function formatDate(date: Date, locale: string = 'en-US'): string {
+export const formatDate = (date: Date, locale: string = 'en-US'): string => {
   let parsedDate: Date;
 
   if (date instanceof Date) {
@@ -19,5 +19,8 @@ export function formatDate(date: Date, locale: string = 'en-US'): string {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
   }).format(parsedDate);
-}
+};

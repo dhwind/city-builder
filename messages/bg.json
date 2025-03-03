@@ -1,1 +1,78 @@
-{}
+{
+  "builder": {
+    "add": "Добави сграда",
+    "buildings": "Сгради",
+    "noBuildings": "Няма налични сгради",
+    "panel": "Панел на сградите"
+  },
+  "common": {
+    "open": "Отвори"
+  },
+  "fields": {
+    "color": {
+      "error": {
+        "message": "Възникна грешка при смяна на цвят за сградата {buildingName}!"
+      },
+      "labels": {
+        "blue": "Син",
+        "green": "Зелен",
+        "orange": "Оранжев",
+        "red": "Червен",
+        "title": "Цвят:",
+        "yellow": "Жълт"
+      },
+      "success": {
+        "message": "Успешно променен цвят за сградата {buildingName}!"
+      }
+    },
+    "floor": {
+      "error": {
+        "max": "{type} може да има максимум {symbolsCount} етажа!",
+        "message": "Възникна грешка при добавяне/изтриване на етаж към сградата {buildingName}!",
+        "min": "{type} може да има минимум {symbolsCount} етажа!"
+      },
+      "labels": {
+        "title": "Етажи:"
+      }
+    },
+    "name": {
+      "error": {
+        "max": "Името трябва да бъде най-много {symbolsCount} символа",
+        "message": "Възникна грешка при смяната на име за сградата {buildingName}!",
+        "min": "Името трябва да бъде поне {symbolsCount} символа"
+      },
+      "success": {
+        "message": "Успешно променено име от {buildingOldName} на {buildingName}!"
+      }
+    },
+    "remove": {
+      "error": {
+        "message": "Възникна грешка при изтриване на сграда {buildingName}!"
+      },
+      "success": {
+        "message": "Сградата {buildingName} беше изтрита!"
+      }
+    },
+    "type": {
+      "error": {
+        "message": "Възникна грешката при смяна на тип на сграда за сградата {buildingName}!"
+      },
+      "labels": {
+        "apartments": "Апартаменти",
+        "house": "Къща",
+        "office": "Офис",
+        "title": "Тип:"
+      },
+      "success": {
+        "message": "Успешно променен тип на сградата {buildingName}!"
+      }
+    }
+  },
+  "metadata": {
+    "homepage": {
+      "description": "City Builder е пясъчник, където можете да построите своя собствен град",
+      "keywords": "град, строител, пясъчник, игра, строи, град строител",
+      "title": "City Builder - Построй своя град"
+    }
+  }
+}
