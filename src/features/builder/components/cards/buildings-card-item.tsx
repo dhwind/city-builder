@@ -70,27 +70,59 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
 
   const changeBuildingAttribute = useCallback(
     <T extends keyof Building>(key: string, value: Building[T]) => {
-      const newBuilding = { ...building, [key]: value };
+      try {
+        const newBuilding = { ...building, [key]: value };
 
-      setBuilding(newBuilding);
+        newBuilding.floors = newBuilding.floors.map(f => ({
+          ...f,
+          color: newBuilding.color,
+        }));
 
-      toast.info(t(`${key}.success.info`), {
-        description: formatDate(new Date()),
-        cancel: {
-          label: <X size={16} />,
-          onClick: () => {}, // required prop
-        },
-      });
+        setBuilding(newBuilding);
+
+        toast.info(
+          t(`${key}.success.message`, {
+            buildingOldName: building.name,
+            buildingName: newBuilding.name,
+          }),
+          {
+            description: formatDate(new Date()),
+            cancel: {
+              label: <X size={16} />,
+              onClick: () => {}, // required prop
+            },
+          },
+        );
+      } catch (err) {
+        console.error(err);
+        toast.error(
+          t(`${key}.error.message`, {
+            buildingName: building.name,
+          }),
+          {
+            description: formatDate(new Date()),
+            cancel: {
+              label: <X size={16} />,
+              onClick: () => {}, // required prop
+            },
+          },
+        );
+      }
     },
     [building, setBuilding, t],
   );
 
   const displayFieldErrorToast = useCallback(
     (error: ParsedError) => {
-      let translationVariables = {};
+      let translationVariables: { [key: string]: string } = {
+        type: t(`type.labels.${building.type}`),
+      };
 
       if (error.symbols) {
-        translationVariables = { symbolsCount: error.symbols!.toString() };
+        translationVariables = {
+          ...translationVariables,
+          symbolsCount: error.symbols!.toString(),
+        };
       }
 
       // translation key is coming as an error message
@@ -102,7 +134,7 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
         },
       });
     },
-    [t],
+    [building.type, t],
   );
 
   const handleNameFocusOut = useCallback(
@@ -131,10 +163,23 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
     }
   }, []);
 
-  const handleRemoveBuilding = useCallback(
-    () => removeBuilding(building.uuid),
-    [building.uuid, removeBuilding],
-  );
+  const handleRemoveBuilding = useCallback(() => {
+    try {
+      removeBuilding(building.uuid);
+      toast.info(
+        t('remove.success.message', {
+          buildingName: building.name,
+        }),
+      );
+    } catch (err) {
+      console.error(err);
+      toast.error(
+        t('remove.error.message', {
+          buildingName: building.name,
+        }),
+      );
+    }
+  }, [building.name, building.uuid, removeBuilding, t]);
 
   const handleSelectType = useCallback(
     (value: string) => {
@@ -201,7 +246,8 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
     <SortableItem
       id={building.uuid}
       prefix="building-card"
-      className="w-full px-2 py-3 border rounded hover:bg-gray-50 flex items-center gap-x-2"
+      sortType="vertical"
+      className="w-full px-2 py-3 border rounded hover:bg-gray-50"
       active={active}
     >
       <div className="flex gap-x-1 w-full">

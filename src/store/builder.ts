@@ -5,7 +5,6 @@ import { Building, Floor } from '@/types/builder';
 import { Store } from '@/types/store';
 import { createStateObj } from '@/utils/store';
 import { generateUUID } from '@/utils/uuid';
-import { builderConfig } from '@/config/builder';
 
 type BuilderState = {
   buildings: Building[];
@@ -78,7 +77,7 @@ const useBuilderStore = create<CurrentStore>()(
                       const floorOrder = b.floors.length + index + 1;
                       return {
                         uuid: generateUUID('floor'),
-                        color: builderConfig.defaultColor,
+                        color: b.color,
                         name: `Floor ${floorOrder}`,
                         order: floorOrder,
                       };

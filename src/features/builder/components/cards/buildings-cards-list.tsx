@@ -69,7 +69,7 @@ const BuildingsCardsList: React.FC = () => {
     <section id="buildings-cards" className="col-span-1">
       <div className="border rounded">
         <div className="w-full bg-gray-100 px-6 py-3 font-bold">
-          {t('buildings')}
+          {t('panel')}
         </div>
         <div className="w-full scrollbar-thin max-h-[600px] h-[600px] overflow-y-auto overflow-x-hidden relative p-2">
           <LoaderLayout isLoading={pending}>
@@ -80,7 +80,7 @@ const BuildingsCardsList: React.FC = () => {
               onDragEndHandler={handleBuildingCardsDragEnd}
             >
               {buildings.length > 0 ? (
-                <ul className="flex flex-col gap-y-2 ">
+                <ul className="flex flex-col gap-y-2">
                   {buildings?.map(building => (
                     <BuildingsCardItem
                       key={building.uuid}
@@ -96,12 +96,12 @@ const BuildingsCardsList: React.FC = () => {
             </DndSort>
           </LoaderLayout>
         </div>
-      </div>
-      <div className="flex justify-center align-center mt-auto bg-gray-100 px-6 py-3 ">
-        <Button variant="outline" onClick={handleAddNewBuilding}>
-          <House size={24} />
-          {t('add')}
-        </Button>
+        <div className="flex justify-center align-center mt-auto bg-gray-100 px-6 py-3 ">
+          <Button variant="outline" onClick={handleAddNewBuilding}>
+            <House size={24} />
+            {t('add')}
+          </Button>
+        </div>
       </div>
     </section>
   );

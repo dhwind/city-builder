@@ -1,0 +1,23 @@
+.ground-bg {
+  width: 100%;
+  min-height: 150px;
+  background: url('../assets/city/ground.png') repeat;
+}
+
+.scrollable-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}
+
+.clear-sky {
+  background: url('../assets/city/clear-sky.png') no-repeat;
+  background-size: cover;
+  background-position: 25% 55%;
+}
+
+.scrollable-content {
+  display: flex;
+  flex-grow: 1;
+}

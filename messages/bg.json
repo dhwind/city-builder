@@ -2,13 +2,17 @@
   "builder": {
     "add": "Добави сграда",
     "buildings": "Сгради",
-    "noBuildings": "Няма налични сгради"
+    "noBuildings": "Няма налични сгради",
+    "panel": "Панел на сградите"
   },
   "common": {
     "open": "Отвори"
   },
   "fields": {
     "color": {
+      "error": {
+        "message": "Възникна грешка при смяна на цвят за сградата {buildingName}!"
+      },
       "labels": {
         "blue": "Син",
         "green": "Зелен",
@@ -18,13 +22,14 @@
         "yellow": "Жълт"
       },
       "success": {
-        "info": "Цветът е успешно обновен!"
+        "message": "Успешно променен цвят за сградата {buildingName}!"
       }
     },
     "floor": {
       "error": {
-        "max": "Сградата трябва да има максимум {symbolsCount} етажа!",
-        "min": "Сградата трябва да има минимум {symbolsCount} етажа!"
+        "max": "{type} може да има максимум {symbolsCount} етажа!",
+        "message": "Възникна грешка при добавяне/изтриване на етаж към сградата {buildingName}!",
+        "min": "{type} може да има минимум {symbolsCount} етажа!"
       },
       "labels": {
         "title": "Етажи:"
@@ -33,13 +38,25 @@
     "name": {
       "error": {
         "max": "Името трябва да бъде най-много {symbolsCount} символа",
+        "message": "Възникна грешка при смяната на име за сградата {buildingName}!",
         "min": "Името трябва да бъде поне {symbolsCount} символа"
       },
       "success": {
-        "info": "Името е успешно обновено!"
+        "message": "Успешно променено име от {buildingOldName} на {buildingName}!"
+      }
+    },
+    "remove": {
+      "error": {
+        "message": "Възникна грешка при изтриване на сграда {buildingName}!"
+      },
+      "success": {
+        "message": "Сградата {buildingName} беше изтрита!"
       }
     },
     "type": {
+      "error": {
+        "message": "Възникна грешката при смяна на тип на сграда за сградата {buildingName}!"
+      },
       "labels": {
         "apartments": "Апартаменти",
         "house": "Къща",
@@ -47,7 +64,7 @@
         "title": "Тип:"
       },
       "success": {
-        "info": "Типът е успешно обновен!"
+        "message": "Успешно променен тип на сградата {buildingName}!"
       }
     }
   },

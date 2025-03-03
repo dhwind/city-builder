@@ -12,6 +12,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       richColors
       toastOptions={{
         classNames: {
+          toast: 'min-w-[25rem]',
           cancelButton: '!bg-transparent',
         },
       }}
