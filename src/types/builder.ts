@@ -11,7 +11,7 @@ export type BuildingType = 'apartments' | 'house' | 'office';
 
 export type Building = {
   color: Color;
-  floors: Floor[];
+  floors: Record<string, Floor>;
   uuid: string;
   name: string;
   type: BuildingType;

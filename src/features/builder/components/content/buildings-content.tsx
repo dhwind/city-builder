@@ -24,7 +24,7 @@ const BuildingsContent: React.FC = () => {
     })),
   );
 
-  const buildingsUuids = buildings.map(b => b.uuid);
+  const buildingsUuids = Object.keys(buildings);
 
   useEffect(() => {
     if (buildingsListRef.current) {
@@ -33,7 +33,7 @@ const BuildingsContent: React.FC = () => {
   }, [buildings]);
 
   const renderActiveCardOverlay = (activeBuildingUuid: UniqueIdentifier) => {
-    const activeBuilding = buildings.find(b => b.uuid === activeBuildingUuid)!;
+    const activeBuilding = buildings[activeBuildingUuid];
 
     return <BuildingItem building={activeBuilding} active />;
   };
@@ -63,8 +63,8 @@ const BuildingsContent: React.FC = () => {
                 ref={buildingsListRef}
                 className="mt-auto pt-[10rem] w-full scrollable-content"
               >
-                {buildings.map(b => (
-                  <BuildingItem key={b.uuid} building={b} />
+                {buildingsUuids.map(uuid => (
+                  <BuildingItem key={uuid} building={buildings[uuid]} />
                 ))}
               </ul>
             </DndSort>

@@ -73,10 +73,12 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
       try {
         const newBuilding = { ...building, [key]: value };
 
-        newBuilding.floors = newBuilding.floors.map(f => ({
-          ...f,
-          color: newBuilding.color,
-        }));
+        newBuilding.floors = Object.fromEntries(
+          Object.entries(newBuilding.floors).map(([uuid, floor]) => [
+            uuid,
+            { ...floor, color: newBuilding.color },
+          ]),
+        );
 
         setBuilding(newBuilding);
 
@@ -186,7 +188,7 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
       const typeValue = value as BuildingType;
       changeBuildingAttribute('type', typeValue);
 
-      const currentFloorsCount = building.floors.length;
+      const currentFloorsCount = Object.keys(building.floors).length;
 
       const defaultFloorsMin = builderConfig[typeValue].min.length;
       const defaultFloorsMax = builderConfig[typeValue].max.length;
@@ -200,7 +202,7 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
       }
     },
     [
-      building.floors.length,
+      building.floors,
       building.uuid,
       changeBuildingAttribute,
       changeFloorsCount,
@@ -294,13 +296,13 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
                 variant="default"
                 type="number"
                 onChange={handleFloorsCountChange}
-                value={building.floors.length}
+                value={Object.keys(building.floors).length}
               />
             </div>
             <Slider
               min={builderConfig[building.type].min.length}
               max={builderConfig[building.type].max.length}
-              value={[building.floors.length]}
+              value={[Object.keys(building.floors).length]}
               className="max-w-48"
               onValueChange={handleSliderChange}
             />

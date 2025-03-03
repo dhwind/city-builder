@@ -18,3 +18,17 @@ export const createStateObj = <T>({
   setPending: value => set({ pending: value }),
   ...state,
 });
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const arrayToRecord = <T extends Record<K, any>, K extends keyof T>(
+  array: T[],
+  key: K,
+): Record<T[K], T> => {
+  return array.reduce(
+    (acc, item) => {
+      acc[item[key]] = item;
+      return acc;
+    },
+    {} as Record<T[K], T>,
+  );
+};

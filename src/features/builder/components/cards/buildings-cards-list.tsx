@@ -13,6 +13,7 @@ import LoaderLayout from '@/layouts/loader';
 import DndSort from '@/layouts/dnd-sort';
 import { useBuilderStore } from '@/store/builder';
 import { Floor } from '@/types/builder';
+import { arrayToRecord } from '@/utils/store';
 import BuildingsCardItem from './buildings-card-item';
 
 const BuildingsCardsList: React.FC = () => {
@@ -27,7 +28,9 @@ const BuildingsCardsList: React.FC = () => {
     })),
   );
 
-  const buildingsUuids = buildings.map(b => b.uuid);
+  const buildingsUuids = Object.keys(buildings);
+
+  const buildingsCount = Object.keys(buildings).length;
 
   const handleAddNewBuilding = () => {
     const defaultBuildingType = builderConfig.defaultType;
@@ -46,15 +49,15 @@ const BuildingsCardsList: React.FC = () => {
 
     addBuilding({
       uuid: generateUUID('building'),
-      name: `Building ${buildings ? buildings!.length + 1 : ''}`,
+      name: `Building ${buildings ? buildingsCount + 1 : ''}`,
       type: defaultBuildingType,
       color: defaultBuildingColor,
-      floors,
+      floors: arrayToRecord(floors, 'uuid'),
     });
   };
 
   const renderActiveCardOverlay = (activeBuildingUuid: UniqueIdentifier) => {
-    const activeBuilding = buildings.find(b => b.uuid === activeBuildingUuid)!;
+    const activeBuilding = buildings[activeBuildingUuid];
 
     return <BuildingsCardItem building={activeBuilding} active />;
   };
@@ -79,13 +82,10 @@ const BuildingsCardsList: React.FC = () => {
               renderActiveItem={renderActiveCardOverlay}
               onDragEndHandler={handleBuildingCardsDragEnd}
             >
-              {buildings.length > 0 ? (
+              {buildingsCount > 0 ? (
                 <ul className="flex flex-col gap-y-2">
-                  {buildings?.map(building => (
-                    <BuildingsCardItem
-                      key={building.uuid}
-                      building={building}
-                    />
+                  {buildingsUuids?.map(uuid => (
+                    <BuildingsCardItem key={uuid} building={buildings[uuid]} />
                   ))}
                 </ul>
               ) : (

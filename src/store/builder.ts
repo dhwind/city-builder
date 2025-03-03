@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { Building, Floor } from '@/types/builder';
+import { Building } from '@/types/builder';
 import { Store } from '@/types/store';
 import { createStateObj } from '@/utils/store';
 import { generateUUID } from '@/utils/uuid';
 
 type BuilderState = {
-  buildings: Building[];
+  buildings: Record<string, Building>;
 };
 
 type BuilderActions = {
@@ -27,72 +27,76 @@ const useBuilderStore = create<CurrentStore>()(
     set =>
       createStateObj<BuilderSlicer>({
         state: {
-          buildings: [],
+          buildings: {},
           addBuilding: (building: Building) =>
             set(state => ({
               ...state,
-              buildings: [...state.buildings, building],
+              buildings: { ...state.buildings, [building.uuid]: building },
             })),
           removeBuilding: (uuid: string) =>
-            set((state: BuilderState) => ({
-              ...state,
-              buildings: state.buildings.filter(
-                building => building.uuid !== uuid,
-              ),
-            })),
+            set((state: BuilderState) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { [uuid]: _, ...remainingBuildings } = state.buildings;
+              return { ...state, buildings: remainingBuildings };
+            }),
           sortBuildings: (buildingsUuids: UniqueIdentifier[]) =>
             set((state: BuilderState) => {
-              const sortedBuildings = buildingsUuids
-                .map(uuid =>
-                  state.buildings.find(building => building.uuid === uuid),
-                )
-                .filter(Boolean) as Building[];
+              const sortedBuildings = buildingsUuids.reduce(
+                (acc, uuid) => {
+                  if (state.buildings[uuid]) {
+                    acc[uuid] = state.buildings[uuid];
+                  }
+                  return acc;
+                },
+                {} as Record<string, Building>,
+              );
               return { ...state, buildings: sortedBuildings };
             }),
           setBuilding: (building: Building) =>
-            set((state: BuilderState) => {
-              const updatedBuildings = state.buildings.map(b => {
-                if (b.uuid === building.uuid) {
-                  return building;
-                }
-
-                return b;
-              });
-              return { ...state, buildings: updatedBuildings };
-            }),
+            set((state: BuilderState) => ({
+              ...state,
+              buildings: { ...state.buildings, [building.uuid]: building },
+            })),
           changeFloorsCount: (buildingUuid: string, count: number) =>
             set((state: BuilderState) => {
-              const updatedBuildings = state.buildings.map(b => {
-                if (b.uuid === buildingUuid) {
-                  const floorsLength = b?.floors?.length;
+              const building = state.buildings[buildingUuid];
 
-                  if (floorsLength > count) {
-                    b.floors = b.floors.filter((_, i) => i < count);
-                  } else {
-                    const floorsToAdd = count - floorsLength;
+              const buildingFloors = Object.keys(building?.floors);
+              const floorsLength = buildingFloors.length;
 
-                    const newFloors: Floor[] = Array.from({
-                      length: floorsToAdd,
-                    }).map((_, index) => {
-                      const floorOrder = b.floors.length + index + 1;
-                      return {
-                        uuid: generateUUID('floor'),
-                        color: b.color,
-                        name: `Floor ${floorOrder}`,
-                        order: floorOrder,
-                      };
-                    });
+              if (floorsLength > count) {
+                buildingFloors
+                  .filter((_, i) => i >= count)
+                  .forEach(floorUuid => {
+                    delete building.floors[floorUuid];
+                  });
+              } else {
+                const floorsToAdd = count - floorsLength;
 
-                    b.floors = [...b.floors, ...newFloors];
-                  }
+                Array.from({
+                  length: floorsToAdd,
+                }).forEach((_, index) => {
+                  const floorOrder = floorsLength + index + 1;
+                  const newFloor = {
+                    uuid: generateUUID('floor'),
+                    color: building.color,
+                    name: `Floor ${floorOrder}`,
+                    order: floorOrder,
+                  };
 
-                  return { ...b, floors: b.floors };
-                }
+                  building.floors[newFloor.uuid] = newFloor;
+                });
+              }
 
-                return b;
-              });
-
-              return { ...state, buildings: updatedBuildings };
+              return {
+                ...state,
+                buildings: {
+                  ...state.buildings,
+                  [buildingUuid]: {
+                    ...building,
+                  },
+                },
+              };
             }),
         },
         set,
