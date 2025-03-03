@@ -15,7 +15,6 @@ const BuildingFloor: React.FC<ComponentProps> = ({
   buildingName,
   floorsCount,
 }) => {
-  console.log('RERENDER');
   const floorTiles = tiles[floor.color];
   let tileRes = '';
 
