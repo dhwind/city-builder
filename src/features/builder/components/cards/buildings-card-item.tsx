@@ -27,13 +27,15 @@ type ComponentProps = {
 const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
   const t = useTranslations('fields');
 
-  const { removeBuilding, setBuilding, changeFloorsCount } = useBuilderStore(
-    useShallow(state => ({
-      removeBuilding: state.removeBuilding,
-      setBuilding: state.setBuilding,
-      changeFloorsCount: state.changeFloorsCount,
-    })),
-  );
+  const { removeBuilding, setBuilding, setBuildingName, changeFloorsCount } =
+    useBuilderStore(
+      useShallow(state => ({
+        removeBuilding: state.removeBuilding,
+        setBuilding: state.setBuilding,
+        setBuildingName: state.setBuildingName,
+        changeFloorsCount: state.changeFloorsCount,
+      })),
+    );
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -142,21 +144,35 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
   const handleNameFocusOut = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-      const result = builderSchema.name.safeParse(value);
+      const newName = value.trim();
+      const result = builderSchema.name.safeParse(newName);
 
       if (inputRef!.current!.value === building.name) {
         return;
       }
 
       if (result.success) {
-        changeBuildingAttribute('name', value.trim());
+        setBuildingName(building.uuid, newName);
+        toast.info(
+          t('name.success.message', {
+            buildingOldName: building.name,
+            buildingName: newName,
+          }),
+          {
+            description: formatDate(new Date()),
+            cancel: {
+              label: <X size={16} />,
+              onClick: () => {}, // required prop
+            },
+          },
+        );
       } else {
         inputRef!.current!.value = building.name;
 
         displayFieldErrorToast(parseError(result.error.errors[0]));
       }
     },
-    [building, changeBuildingAttribute, displayFieldErrorToast],
+    [building, setBuildingName, displayFieldErrorToast],
   );
 
   const handleNameFocus = useCallback(() => {

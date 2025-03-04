@@ -15,6 +15,7 @@ type BuilderActions = {
   removeBuilding: (uuid: string) => void;
   sortBuildings: (buildingsUuids: UniqueIdentifier[]) => void;
   setBuilding: (building: Building) => void;
+  setBuildingName: (buildingUuid: string, value: string) => void;
   changeFloorsCount: (buildingUuid: string, count: number) => void;
 };
 
@@ -57,6 +58,20 @@ const useBuilderStore = create<CurrentStore>()(
               ...state,
               buildings: { ...state.buildings, [building.uuid]: building },
             })),
+          setBuildingName: (buildingUuid: string, value: string) =>
+            set((state: BuilderState) => {
+              const originalBuilding = state.buildings[buildingUuid];
+
+              originalBuilding.name = value;
+
+              return {
+                ...state,
+                buildings: {
+                  ...state.buildings,
+                  [buildingUuid]: originalBuilding,
+                },
+              };
+            }),
           changeFloorsCount: (buildingUuid: string, count: number) =>
             set((state: BuilderState) => {
               const building = state.buildings[buildingUuid];
