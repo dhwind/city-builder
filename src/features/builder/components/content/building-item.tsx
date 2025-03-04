@@ -28,17 +28,31 @@ const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
 
   const tiles = buildingFloorsTilesRes[building.type];
 
-  const floorsList = useMemo(() => {
-    return Object.values(building.floors).map((floor, i, arr) => (
+  const floorsList = Object.values(building.floors).map((floor, i, arr) => {
+    const floorTiles = tiles[floor.color];
+    const floorsCount = arr.length;
+
+    let tileRes = '';
+
+    if (floor.order === 1) {
+      tileRes =
+        floorsCount > 1 ? floorTiles.initial : floorTiles.initial1Floor!;
+    } else if (floor.order === floorsCount) {
+      tileRes = floorTiles.roof;
+    } else {
+      tileRes = floorTiles.middle;
+    }
+
+    return (
       <BuildingFloor
         key={floor.uuid}
         floor={floor}
-        floorsCount={arr.length}
+        tileRes={tileRes}
         buildingName={building.name}
-        tiles={tiles}
+        tileImgWidth={tiles.tileImgWidth}
       />
-    ));
-  }, [building.floors, tiles, building.name]);
+    );
+  });
 
   const handleRemoveBuilding = useCallback(() => {
     try {

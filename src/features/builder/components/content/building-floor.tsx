@@ -1,31 +1,21 @@
 import { BuildingRes } from '@/config/builder';
 import { Floor } from '@/types/builder';
 import DynamicImage from '@/components/dynamic-image';
+import { memo } from 'react';
 
 type ComponentProps = {
   floor: Floor;
-  floorsCount: number;
-  tiles: BuildingRes;
+  tileRes: string;
+  tileImgWidth: number;
   buildingName: string;
 };
 
 const BuildingFloor: React.FC<ComponentProps> = ({
   floor,
-  tiles,
+  tileRes,
   buildingName,
-  floorsCount,
+  tileImgWidth,
 }) => {
-  const floorTiles = tiles[floor.color];
-  let tileRes = '';
-
-  if (floor.order === 1) {
-    tileRes = floorsCount > 1 ? floorTiles.initial : floorTiles.initial1Floor!;
-  } else if (floor.order === floorsCount) {
-    tileRes = floorTiles.roof;
-  } else {
-    tileRes = floorTiles.middle;
-  }
-
   return (
     <div
       key={floor.uuid}
@@ -33,7 +23,7 @@ const BuildingFloor: React.FC<ComponentProps> = ({
     >
       <DynamicImage
         src={tileRes}
-        width={tiles.tileImgWidth}
+        width={tileImgWidth}
         className="hover:opacity-85"
         alt={`${buildingName} floor`}
       />
@@ -41,4 +31,4 @@ const BuildingFloor: React.FC<ComponentProps> = ({
   );
 };
 
-export default BuildingFloor;
+export default memo(BuildingFloor);
