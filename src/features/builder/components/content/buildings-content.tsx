@@ -9,10 +9,14 @@ import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { useBuilderStore } from '@/store/builder';
 import DndSort from '@/layouts/dnd-sort';
-import BuildingItem from './building-item';
-import { WeatherPanel } from '@/features/weather';
+import {
+  WeatherLocation,
+  WeatherPanel,
+  WeatherTemperature,
+} from '@/features/weather';
 import { useWeatherStore } from '@/store/weather';
 import { cn } from '@/lib/utils';
+import BuildingItem from './building-item';
 
 const BuildingsContent: React.FC = () => {
   const t = useTranslations('builder');
@@ -66,7 +70,11 @@ const BuildingsContent: React.FC = () => {
             !pending ? `background-image-${currentWeather}` : '',
           )}
         >
-          <div className="absolute right-5 top-3">
+          <div className="absolute left-3 top-3">
+            <WeatherTemperature />
+          </div>
+          <div className="flex items-center gap-x-2 absolute right-5 top-3">
+            <WeatherLocation />
             <WeatherPanel />
           </div>
           <div className="scrollable-container scrollbar-thin">

@@ -1,6 +1,6 @@
+import { memo } from 'react';
 import { Floor } from '@/types/builder';
 import DynamicImage from '@/components/dynamic-image';
-import { memo } from 'react';
 
 type ComponentProps = {
   floor: Floor;

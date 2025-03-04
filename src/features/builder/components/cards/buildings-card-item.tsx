@@ -172,7 +172,7 @@ const BuildingsCardItem: React.FC<ComponentProps> = ({ building, active }) => {
         displayFieldErrorToast(parseError(result.error.errors[0]));
       }
     },
-    [building, setBuildingName, displayFieldErrorToast],
+    [building.name, building.uuid, setBuildingName, t, displayFieldErrorToast],
   );
 
   const handleNameFocus = useCallback(() => {

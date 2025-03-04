@@ -74,5 +74,30 @@
       "keywords": "град, строител, пясъчник, игра, строи, град строител",
       "title": "City Builder - Построй своя град"
     }
+  },
+  "weather": {
+    "dropdownLabel": "Избери локация:",
+    "location": {
+      "bagdad": "Багдад",
+      "capeTown": "Кейптаун",
+      "dubai": "Дубай",
+      "dublin": "Дъблин",
+      "edinburgh": "Единбург",
+      "london": "Лондон",
+      "melbourne": "Мелбърн",
+      "newYork": "Ню Йорк",
+      "oslo": "Осло",
+      "reykjavik": "Рейкявик",
+      "seattle": "Сиатъл",
+      "sofia": "София",
+      "sydney": "Сидни",
+      "tokyo": "Токио",
+      "toronto": "Торонто",
+      "vancouver": "Ванкувър"
+    },
+    "metrics": {
+      "celsius": "{{temperature}}°C",
+      "fahrenheit": "{{temperature}}°F"
+    }
   }
 }

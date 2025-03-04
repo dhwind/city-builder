@@ -1,16 +1,16 @@
+import { useShallow } from 'zustand/react/shallow';
 import { Button } from '@/components/ui/button';
 import { weatherConfig } from '@/config/weather';
 import LoaderLayout from '@/layouts/loader';
 import { cn } from '@/lib/utils';
 import { useWeatherStore } from '@/store/weather';
-import { useShallow } from 'zustand/react/shallow';
 
-const WeatherPanel = () => {
-  const { currentWeather, pending, setWeather } = useWeatherStore(
+const WeatherPanel: React.FC = () => {
+  const { currentWeather, pending, setCurrentWeather } = useWeatherStore(
     useShallow(state => ({
       currentWeather: state.currentWeather,
       pending: state.pending,
-      setWeather: state.setWeather,
+      setCurrentWeather: state.setCurrentWeather,
     })),
   );
 
@@ -19,19 +19,18 @@ const WeatherPanel = () => {
       key={`weather-button-${weatherType.id}`}
       variant="outline"
       className={cn(
-        'mt-auto bg-gray-100 hover:bg-gray-400 !h-auto !p-1 rounded',
+        'mt-auto bg-gray-100 hover:bg-gray-400 !h-auto !p-2 rounded',
         weatherType.id === currentWeather ? 'bg-gray-400' : '',
       )}
-      onClick={() => setWeather(weatherType.id)}
+      onClick={() => setCurrentWeather(weatherType.id)}
     >
-      <weatherType.Icon size={12} />
+      <weatherType.Icon size={16} />
     </Button>
   ));
-  console.log('here');
 
   return (
-    <div className="rounded border-3 bg-white px-2 py-1">
-      <LoaderLayout size="xs" className="p-0" isLoading={pending}>
+    <div className="rounded border-3 bg-white px-2 py-1 min-w-[140px]">
+      <LoaderLayout size="xs" className="p-2" isLoading={pending}>
         <div className="flex items-center gap-x-2">{weatherButtons}</div>
       </LoaderLayout>
     </div>
