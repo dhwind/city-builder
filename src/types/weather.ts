@@ -1,3 +1,3 @@
-export type Weather = 'rainy' | 'snowy' | 'sunny';
+export type Weather = 'rain' | 'snow' | 'clear-sky';
 
 export type TimeOfDay = 'day' | 'night';

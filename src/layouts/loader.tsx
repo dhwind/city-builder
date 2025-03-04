@@ -9,7 +9,7 @@ type ComponentProps = {
   className?: string;
   isLoading: boolean;
   message?: string;
-  size?: 'medium' | 'small' | 'large' | 'xl';
+  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl';
 };
 
 /**

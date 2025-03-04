@@ -1,7 +1,7 @@
 .ground-bg {
   width: 100%;
   min-height: 150px;
-  background: url('../assets/city/ground.png') repeat;
+  background: url('../assets/city/background/ground.png') repeat;
 }
 
 .scrollable-container {
@@ -11,8 +11,20 @@
   overflow: auto;
 }
 
-.clear-sky {
-  background: url('../assets/city/clear-sky.png') no-repeat;
+.background-image-clear-sky {
+  background: url('../assets/city/background/clear-sky.gif') no-repeat;
+  background-size: cover;
+  background-position: 25% 55%;
+}
+
+.background-image-rain {
+  background: url('../assets/city/background/rain.gif') no-repeat;
+  background-size: cover;
+  background-position: 25% 55%;
+}
+
+.background-image-snow {
+  background: url('../assets/city/background/snow.gif') no-repeat;
   background-size: cover;
   background-position: 25% 55%;
 }

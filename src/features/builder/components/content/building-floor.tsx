@@ -1,4 +1,3 @@
-import { BuildingRes } from '@/config/builder';
 import { Floor } from '@/types/builder';
 import DynamicImage from '@/components/dynamic-image';
 import { memo } from 'react';

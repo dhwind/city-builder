@@ -10,12 +10,18 @@ import { UniqueIdentifier } from '@dnd-kit/core';
 import { useBuilderStore } from '@/store/builder';
 import DndSort from '@/layouts/dnd-sort';
 import BuildingItem from './building-item';
+import { WeatherPanel } from '@/features/weather';
+import { useWeatherStore } from '@/store/weather';
+import { cn } from '@/lib/utils';
 
 const BuildingsContent: React.FC = () => {
   const t = useTranslations('builder');
-
-  const buildingsListRef = useRef<HTMLUListElement>(null);
-  const [groundBgWidth, setGroundBgWidth] = useState<string>('100%');
+  const { currentWeather, pending } = useWeatherStore(
+    useShallow(state => ({
+      currentWeather: state.currentWeather,
+      pending: state.pending,
+    })),
+  );
 
   const { buildings, sortBuildings } = useBuilderStore(
     useShallow(state => ({
@@ -23,6 +29,9 @@ const BuildingsContent: React.FC = () => {
       sortBuildings: state.sortBuildings,
     })),
   );
+
+  const buildingsListRef = useRef<HTMLUListElement>(null);
+  const [groundBgWidth, setGroundBgWidth] = useState<string>('100%');
 
   const buildingsUuids = Object.keys(buildings);
 
@@ -51,7 +60,15 @@ const BuildingsContent: React.FC = () => {
           {t('buildings')}
         </div>
 
-        <div className="h-[660px] max-h-[660px] clear-sky">
+        <div
+          className={cn(
+            'h-[660px] max-h-[660px] relative',
+            !pending ? `background-image-${currentWeather}` : '',
+          )}
+        >
+          <div className="absolute right-5 top-3">
+            <WeatherPanel />
+          </div>
           <div className="scrollable-container scrollbar-thin">
             <DndSort
               items={buildingsUuids}
