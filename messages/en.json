@@ -68,6 +68,14 @@
       }
     }
   },
+  "languageSelector": {
+    "languages": {
+      "bg": "BG",
+      "en": "EN",
+      "vn": "VN"
+    },
+    "selectLanguage": "Select Language:"
+  },
   "metadata": {
     "homepage": {
       "description": "City Builder is a sandbox where you can build your own city",
