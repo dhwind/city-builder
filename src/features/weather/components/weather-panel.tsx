@@ -6,13 +6,15 @@ import { cn } from '@/lib/utils';
 import { useWeatherStore } from '@/store/weather';
 
 const WeatherPanel: React.FC = () => {
-  const { currentWeather, pending, setCurrentWeather } = useWeatherStore(
-    useShallow(state => ({
-      currentWeather: state.currentWeather,
-      pending: state.pending,
-      setCurrentWeather: state.setCurrentWeather,
-    })),
-  );
+  const { currentWeather, pending, setCurrentWeather, setSimulation } =
+    useWeatherStore(
+      useShallow(state => ({
+        currentWeather: state.currentWeather,
+        pending: state.pending,
+        setCurrentWeather: state.setCurrentWeather,
+        setSimulation: state.setSimulation,
+      })),
+    );
 
   const weatherButtons = weatherConfig.types.map(weatherType => (
     <Button
@@ -22,7 +24,10 @@ const WeatherPanel: React.FC = () => {
         'mt-auto bg-gray-100 hover:bg-gray-400 !h-auto !p-2 rounded',
         weatherType.id === currentWeather ? 'bg-gray-400' : '',
       )}
-      onClick={() => setCurrentWeather(weatherType.id)}
+      onClick={() => {
+        setCurrentWeather(weatherType.id);
+        setSimulation(true);
+      }}
     >
       <weatherType.Icon size={16} />
     </Button>

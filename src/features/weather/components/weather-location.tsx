@@ -1,13 +1,13 @@
 import { useTranslations } from 'next-intl';
 import { useShallow } from 'zustand/react/shallow';
 import { MousePointerClick } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { useGetLocationWeather } from '../api/use-get-location-weather';
+import { useCallback, useEffect, useState } from 'react';
 import SelectDropdown from '@/components/select-dropdown';
 import { weatherConfig } from '@/config/weather';
 import { Button } from '@/components/ui/button';
 import { useWeatherStore } from '@/store/weather';
 import LoaderLayout from '@/layouts/loader';
+import { useGetLocationWeather } from '../api/use-get-location-weather';
 
 const WeatherLocation: React.FC = () => {
   const t = useTranslations('weather');
@@ -15,6 +15,8 @@ const WeatherLocation: React.FC = () => {
   const {
     pending,
     currentLocation,
+    simulation,
+    setSimulation,
     setCurrentLocation,
     setCurrentWeather,
     setCurrentTemperature,
@@ -22,6 +24,8 @@ const WeatherLocation: React.FC = () => {
     useShallow(state => ({
       pending: state.pending,
       currentLocation: state.currentLocation,
+      simulation: state.simulation,
+      setSimulation: state.setSimulation,
       setCurrentLocation: state.setCurrentLocation,
       setCurrentWeather: state.setCurrentWeather,
       setCurrentTemperature: state.setCurrentTemperature,
@@ -44,27 +48,32 @@ const WeatherLocation: React.FC = () => {
     label: t(`location.${location.id}`),
   }));
 
-  const handleSelectLocation = (location: string) => {
-    setCurrentCity(location);
-  };
+  const handleSelectLocation = useCallback(
+    (location: string) => {
+      setCurrentCity(location);
+    },
+    [setCurrentCity],
+  );
 
-  const handleGetLocationWeather = () => {
+  const handleGetLocationWeather = useCallback(() => {
     refetch();
     setCurrentLocation(currentCity);
-  };
+    setSimulation(false);
+  }, [currentCity, refetch, setCurrentLocation, setSimulation]);
 
   useEffect(() => {
-    if (!weatherData) {
+    if (!weatherData || simulation) {
       return;
     }
 
     setCurrentWeather(weatherData.weather);
     setCurrentTemperature(weatherData.temperature);
-  }, [setCurrentTemperature, setCurrentWeather, weatherData]);
+  }, [setCurrentTemperature, setCurrentWeather, weatherData, simulation]);
 
   useEffect(() => {
     setCurrentCity(currentLocation);
-  }, [currentLocation]);
+    setSimulation(false);
+  }, [currentLocation, setSimulation, setCurrentCity]);
 
   return (
     <div className="flex gap-x-2 items-center rounded border-3 bg-white px-2 py-1">

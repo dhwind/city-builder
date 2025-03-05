@@ -13,12 +13,14 @@ type WeatherState = {
     value: number;
     range: WeatherTemperatureRangeType;
   } | null;
+  simulation: boolean;
 };
 
 type WeatherActions = {
   setCurrentWeather: (Weather: Weather) => void;
   setCurrentLocation: (location: string) => void;
   setCurrentTemperature: (temperature: number) => void;
+  setSimulation: (simulation: boolean) => void;
 };
 
 type WeatherSlicer = WeatherState & WeatherActions;
@@ -29,6 +31,7 @@ const initialState: WeatherState = {
   currentWeather: 'clear-sky',
   currentLocation: weatherConfig.location.default,
   currentTemperature: null,
+  simulation: false,
 };
 
 const useWeatherStore = create<CurrentStore>()(
@@ -48,6 +51,11 @@ const useWeatherStore = create<CurrentStore>()(
                 range: getTemperatureRange(temperature),
                 value: temperature,
               },
+            })),
+          setSimulation: (simulation: boolean) =>
+            set(state => ({
+              ...state,
+              simulation,
             })),
         },
         set,
