@@ -70,10 +70,10 @@ const BuildingsContent: React.FC = () => {
             !pending ? `background-image-${currentWeather}` : '',
           )}
         >
-          <div className="absolute left-3 top-3 z-50">
+          <div className="absolute right-3 md:right-auto md:left-3 top-3 z-50">
             <WeatherTemperature />
           </div>
-          <div className="flex items-center gap-x-2 absolute right-5 top-3 z-50">
+          <div className="flex flex-col items-start gap-2 absolute left-3 md:flex-row md:items-center md:left-auto md:right-5 top-3 z-50">
             <WeatherLocation />
             <WeatherPanel />
           </div>
