@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Floor } from '@/types/builder';
 import DynamicImage from '@/components/dynamic-image';
@@ -7,6 +7,7 @@ import SelectDropdown from '@/components/select-dropdown';
 import { builderConfig } from '@/config/builder';
 import { SelectableItem } from '@/types/common';
 import usePopover from '@/hooks/use-popover';
+import { useHover } from '@/hooks/use-hover';
 
 type ComponentProps = {
   floor: Floor;
@@ -22,6 +23,9 @@ const BuildingFloor: React.FC<ComponentProps> = ({
   onChangeFloorColor,
 }) => {
   const t = useTranslations('fields');
+
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isHovered = useHover<HTMLDivElement>(itemRef);
 
   const { popoverOpen, coordinates, setPopoverOpen, handlePopoverTrigger } =
     usePopover();
@@ -43,13 +47,14 @@ const BuildingFloor: React.FC<ComponentProps> = ({
   return (
     <div
       key={floor.uuid}
-      className="px-4 flex justify-center w-auto h-auto min-w-[200px] cursor-pointer hover:bg-gray-100 hover:border-y"
+      className="px-4 flex justify-center w-auto h-auto min-w-[200px] cursor-pointer hover:bg-gray-100 transition-colors duration-300"
       onClick={handlePopoverTrigger}
+      ref={itemRef}
     >
       <DynamicImage
         src={tileRes}
         width={tileImgWidth}
-        className="hover:opacity-85"
+        className={isHovered ? 'opacity-85' : ''}
         alt={`floor ${floor.name}`}
       />
       <PopoverAtCoordinates

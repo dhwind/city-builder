@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -9,6 +9,7 @@ import SortableItem from '@/layouts/sortable-item';
 import { useBuilderStore } from '@/store/builder';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/utils/date';
+import { useHover } from '@/hooks/use-hover';
 import BuildingFloor from './building-floor';
 
 type ComponentProps = {
@@ -18,7 +19,9 @@ type ComponentProps = {
 
 const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
   const t = useTranslations('fields');
-  const [itemHovered, setItemHovered] = useState<boolean>(false);
+
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isHovered = useHover<HTMLDivElement>(itemRef);
 
   const { removeBuilding, setFloorColor } = useBuilderStore(
     useShallow(state => ({
@@ -101,20 +104,20 @@ const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
       sortType="horizontal"
       className="mt-auto h-auto rounded-x rounded-t border-x-3 border-t-3 border-transparent hover:border-gray-400 transition-all"
       active={active}
-      hovered={itemHovered}
-      handleHover={(hovered: boolean) => setItemHovered(hovered)}
+      hovered={isHovered}
+      ref={itemRef}
     >
       <div className="flex flex-col-reverse items-center relative -mb-1">
         {floorsList}
         <Button
           variant="default"
           onClick={handleRemoveBuilding}
-          className={`absolute rounded bg-gray-200 hover:bg-gray-400 right-0 top-0 opacity-0 z-50 transition-opacity ${itemHovered ? 'opacity-100' : ''}`}
+          className={`absolute rounded bg-gray-200 hover:bg-gray-400 right-0 top-0 opacity-0 z-50 transition-opacity ${isHovered ? 'opacity-100' : ''}`}
         >
           <X className="stroke-black" size={16} />
         </Button>
         <div
-          className={`absolute bottom-0 opacity-0 w-full p-1 leading-normal bg-gray-100 text-xs text-center transition-opacity ${itemHovered ? 'opacity-100' : ''}`}
+          className={`absolute bottom-0 opacity-0 w-full p-1 leading-normal bg-gray-100 text-xs text-center transition-opacity ${isHovered ? 'opacity-100' : ''}`}
         >
           {building.name}
         </div>

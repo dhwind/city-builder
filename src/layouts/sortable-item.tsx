@@ -12,7 +12,7 @@ type ComponentProps = {
   prefix?: string;
   className?: string;
   hovered?: boolean;
-  handleHover?: (hovered: boolean) => void;
+  ref?: React.Ref<HTMLDivElement>;
 };
 
 const SortableItem: React.FC<ComponentProps> = ({
@@ -23,7 +23,7 @@ const SortableItem: React.FC<ComponentProps> = ({
   className,
   active,
   hovered,
-  handleHover,
+  ref,
 }) => {
   const {
     attributes,
@@ -47,36 +47,20 @@ const SortableItem: React.FC<ComponentProps> = ({
   return (
     <li
       id={prefix ? `${prefix}-${id}` : id}
-      className={cn(
-        'flex items-center gap-2 relative',
-        className,
-        isDragging ? 'opacity-[.4]' : '',
-        isVertical ? 'flex-row' : 'flex-col border-b-transparent',
-      )}
       ref={setNodeRef}
       style={style}
-      onMouseEnter={() => handleHover?.(true)}
-      onMouseLeave={() => handleHover?.(false)}
+      className="flex mt-auto h-auto"
     >
-      {isVertical ? (
-        <Button
-          variant="ghost"
-          className={cn(
-            '!h-auto !p-2 rounded',
-            active ? 'cursor-grabbing' : 'cursor-grab',
-          )}
-          ref={setActivatorNodeRef}
-          {...attributes}
-          {...listeners}
-        >
-          <GripVertical className="stroke-gray-500" size={24} />
-        </Button>
-      ) : null}
-      <div className="w-full">{children}</div>
-      {!isVertical ? (
-        <div
-          className={`w-full rounded-b py-1 flex justify-center items-center absolute top-full bg-gray-200 opacity-0 transition-opacity ${hovered ? 'opacity-100' : ''}`}
-        >
+      <div
+        ref={ref}
+        className={cn(
+          'flex items-center gap-2 relative',
+          className,
+          isDragging ? 'opacity-[.4]' : '',
+          isVertical ? 'flex-row' : 'flex-col border-b-transparent',
+        )}
+      >
+        {isVertical ? (
           <Button
             variant="ghost"
             className={cn(
@@ -89,8 +73,27 @@ const SortableItem: React.FC<ComponentProps> = ({
           >
             <GripVertical className="stroke-gray-500" size={24} />
           </Button>
-        </div>
-      ) : null}
+        ) : null}
+        <div className="w-full">{children}</div>
+        {!isVertical ? (
+          <div
+            className={`w-full rounded-b py-1 flex justify-center items-center absolute top-full bg-gray-200 opacity-0 transition-opacity ${hovered ? 'opacity-100' : ''}`}
+          >
+            <Button
+              variant="ghost"
+              className={cn(
+                '!h-auto !p-2 rounded',
+                active ? 'cursor-grabbing' : 'cursor-grab',
+              )}
+              ref={setActivatorNodeRef}
+              {...attributes}
+              {...listeners}
+            >
+              <GripVertical className="stroke-gray-500" size={24} />
+            </Button>
+          </div>
+        ) : null}
+      </div>
     </li>
   );
 };
