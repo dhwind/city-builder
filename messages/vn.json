@@ -1,0 +1,111 @@
+{
+  "builder": {
+    "add": "Thêm Tòa Nhà",
+    "buildings": "Các Tòa Nhà",
+    "noBuildings": "Không có tòa nhà nào",
+    "panel": "Bảng Điều Khiển Tòa Nhà"
+  },
+  "common": {
+    "open": "Mở"
+  },
+  "fields": {
+    "color": {
+      "error": {
+        "message": "Không thể cập nhật màu cho tòa nhà {buildingName}!"
+      },
+      "labels": {
+        "blue": "Xanh Dương",
+        "green": "Xanh Lá",
+        "orange": "Cam",
+        "red": "Đỏ",
+        "title": "Màu:",
+        "yellow": "Vàng"
+      },
+      "success": {
+        "message": "Đã cập nhật màu thành công cho tòa nhà {buildingName}!"
+      }
+    },
+    "floor": {
+      "error": {
+        "max": "{type} có thể có tối đa {symbolsCount} tầng!",
+        "message": "Không thể thêm/xóa tầng cho tòa nhà {buildingName}!",
+        "min": "{type} có thể có tối thiểu {symbolsCount} tầng!"
+      },
+      "labels": {
+        "title": "Tầng:"
+      }
+    },
+    "name": {
+      "error": {
+        "max": "Tên phải dài tối đa {symbolsCount} ký tự",
+        "message": "Không thể thay đổi tên cho tòa nhà {buildingName}!",
+        "min": "Tên phải dài tối thiểu {symbolsCount} ký tự"
+      },
+      "success": {
+        "message": "Đã cập nhật tên thành công từ {buildingOldName} thành {buildingName}!"
+      }
+    },
+    "remove": {
+      "error": {
+        "message": "Không thể xóa tòa nhà {buildingName}!"
+      },
+      "success": {
+        "message": "Tòa nhà {buildingName} đã bị xóa!"
+      }
+    },
+    "type": {
+      "error": {
+        "message": "Không thể thay đổi loại cho tòa nhà {buildingName}!"
+      },
+      "labels": {
+        "apartments": "Căn Hộ",
+        "house": "Nhà",
+        "office": "Văn Phòng",
+        "title": "Loại:"
+      },
+      "success": {
+        "message": "Đã cập nhật loại thành công cho tòa nhà {buildingName}!"
+      }
+    }
+  },
+  "languageSelector": {
+    "languages": {
+      "bg": "BG",
+      "en": "EN",
+      "vn": "VN"
+    },
+    "selectLanguage": "Chọn Ngôn Ngữ:"
+  },
+  "metadata": {
+    "homepage": {
+      "description": "City Builder là một sandbox nơi bạn có thể xây dựng thành phố của riêng mình",
+      "keywords": "thành phố, xây dựng, sandbox, trò chơi, xây dựng, city builder",
+      "title": "City Builder - Xây dựng thành phố của bạn"
+    }
+  },
+  "weather": {
+    "dropdownLabel": "Chọn địa điểm:",
+    "location": {
+      "bagdad": "Bagdad",
+      "capeTown": "Cape Town",
+      "dubai": "Dubai",
+      "dublin": "Dublin",
+      "edinburgh": "Edinburgh",
+      "london": "London",
+      "melbourne": "Melbourne",
+      "newYork": "New York",
+      "oslo": "Oslo",
+      "reykjavik": "Reykjavik",
+      "seattle": "Seattle",
+      "sofia": "Sofia",
+      "sydney": "Sydney",
+      "tokyo": "Tokyo",
+      "toronto": "Toronto",
+      "vancouver": "Vancouver"
+    },
+    "metrics": {
+      "celsius": "{temperature}°C",
+      "fahrenheit": "{temperature}°F"
+    }
+  }
+}

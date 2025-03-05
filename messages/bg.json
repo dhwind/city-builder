@@ -68,6 +68,14 @@
       }
     }
   },
+  "languageSelector": {
+    "languages": {
+      "bg": "BG",
+      "en": "EN",
+      "vn": "VN"
+    },
+    "selectLanguage": "Избери език:"
+  },
   "metadata": {
     "homepage": {
       "description": "City Builder е пясъчник, където можете да построите своя собствен град",
@@ -96,8 +104,8 @@
       "vancouver": "Ванкувър"
     },
     "metrics": {
-      "celsius": "{{temperature}}°C",
-      "fahrenheit": "{{temperature}}°F"
+      "celsius": "{temperature}°C",
+      "fahrenheit": "{temperature}°F"
     }
   }
 }

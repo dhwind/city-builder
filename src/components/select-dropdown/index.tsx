@@ -9,13 +9,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SelectableItem } from '@/types/common';
+import { SelectableDropdownItem } from '@/types/common';
 
 type SelectProps = {
-  items: SelectableItem<string>[];
+  items: SelectableDropdownItem[];
   headerLabel?: string;
   defaultValue?: string;
   triggerLabel?: string;
+  className?: {
+    trigger?: string;
+    content?: string;
+  };
   onSelect: (value: string) => void;
 };
 
@@ -24,6 +28,7 @@ const SelectDropdown: React.FC<SelectProps> = ({
   headerLabel,
   defaultValue,
   triggerLabel,
+  className,
   onSelect,
 }) => {
   const t = useTranslations('common');
@@ -40,17 +45,22 @@ const SelectDropdown: React.FC<SelectProps> = ({
 
   return (
     <Select value={selectedValue} onValueChange={handleSelect}>
-      <SelectTrigger className="bg-white">
+      <SelectTrigger className={className?.trigger}>
         <SelectValue placeholder={triggerLabel || t('open')} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className={className?.content}>
         {headerLabel && (
           <SelectGroup>
             <SelectLabel>{headerLabel}</SelectLabel>
           </SelectGroup>
         )}
         {items.map(item => (
-          <SelectItem key={item.value} value={item.value}>
+          <SelectItem
+            key={item.value}
+            value={item.value}
+            className="flex items-center gap-x-2"
+          >
+            <div>{item.icon ? item.icon : null}</div>
             {item.label}
           </SelectItem>
         ))}

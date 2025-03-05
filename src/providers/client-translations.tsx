@@ -8,7 +8,14 @@ const ClientTranslationsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <NextIntlClientProvider
-      messages={pick(messages, 'builder', 'common', 'fields', 'weather')}
+      messages={pick(
+        messages,
+        'builder',
+        'common',
+        'fields',
+        'weather',
+        'languageSelector',
+      )}
     >
       {children}
     </NextIntlClientProvider>
