@@ -74,5 +74,30 @@
       "keywords": "city, builder, sandbox, game, build, city builder",
       "title": "City Builder - Build your city"
     }
+  },
+  "weather": {
+    "dropdownLabel": "Select location:",
+    "location": {
+      "bagdad": "Bagdad",
+      "capeTown": "Cape Town",
+      "dubai": "Dubai",
+      "dublin": "Dublin",
+      "edinburgh": "Edinburgh",
+      "london": "London",
+      "melbourne": "Melbourne",
+      "newYork": "New York",
+      "oslo": "Oslo",
+      "reykjavik": "Reykjavik",
+      "seattle": "Seattle",
+      "sofia": "Sofia",
+      "sydney": "Sydney",
+      "tokyo": "Tokyo",
+      "toronto": "Toronto",
+      "vancouver": "Vancouver"
+    },
+    "metrics": {
+      "celsius": "{temperature}°C",
+      "fahrenheit": "{temperature}°F"
+    }
   }
 }
