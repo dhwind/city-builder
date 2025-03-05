@@ -13,7 +13,7 @@
     "prepare": "husky"
   },
   "engines": {
-    "node": ">=23.9.0"
+    "node": ">=22.13.8"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
