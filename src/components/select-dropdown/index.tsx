@@ -58,7 +58,7 @@ const SelectDropdown: React.FC<SelectProps> = ({
           <SelectItem
             key={item.value}
             value={item.value}
-            className="flex items-center gap-x-2"
+            className="flex items-center cursor-pointer gap-x-2"
           >
             <div>{item.icon ? item.icon : null}</div>
             {item.label}

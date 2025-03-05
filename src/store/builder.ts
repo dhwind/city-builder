@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { Building } from '@/types/builder';
+import { Building, Color } from '@/types/builder';
 import { Store } from '@/types/store';
 import { createStateObj } from '@/utils/store';
 import { generateUUID } from '@/utils/uuid';
@@ -16,6 +16,11 @@ type BuilderActions = {
   sortBuildings: (buildingsUuids: UniqueIdentifier[]) => void;
   setBuilding: (building: Building) => void;
   setBuildingName: (buildingUuid: string, value: string) => void;
+  setFloorColor: (
+    buildingUuid: string,
+    floorUuid: string,
+    color: Color,
+  ) => void;
   changeFloorsCount: (buildingUuid: string, count: number) => void;
 };
 
@@ -69,6 +74,27 @@ const useBuilderStore = create<CurrentStore>()(
                 buildings: {
                   ...state.buildings,
                   [buildingUuid]: originalBuilding,
+                },
+              };
+            }),
+          setFloorColor: (
+            buildingUuid: string,
+            floorUuid: string,
+            color: Color,
+          ) =>
+            set((state: BuilderState) => {
+              const building = state.buildings[buildingUuid];
+              const floor = { ...building.floors[floorUuid] };
+
+              building.floors[floorUuid] = { ...floor, color };
+
+              return {
+                ...state,
+                buildings: {
+                  ...state.buildings,
+                  [buildingUuid]: {
+                    ...building,
+                  },
                 },
               };
             }),
