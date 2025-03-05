@@ -29,12 +29,9 @@ const LanguageSelector: React.FC = () => {
       />
     ),
   }));
-  console.log(locationItems);
 
   const handleChangeLanguage = (value: string) => {
     const newLocale = value as Language;
-
-    console.log(newLocale);
 
     router.replace(pathname, { locale: newLocale });
   };
