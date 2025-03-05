@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import { Building } from '@/types/builder';
+import { Building, Color } from '@/types/builder';
 import { buildingFloorsTilesRes } from '@/config/builder';
 import SortableItem from '@/layouts/sortable-item';
 import { useBuilderStore } from '@/store/builder';
@@ -20,13 +20,21 @@ const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
   const t = useTranslations('fields');
   const [itemHovered, setItemHovered] = useState<boolean>(false);
 
-  const { removeBuilding } = useBuilderStore(
+  const { removeBuilding, setFloorColor } = useBuilderStore(
     useShallow(state => ({
       removeBuilding: state.removeBuilding,
+      setFloorColor: state.setFloorColor,
     })),
   );
 
   const tiles = buildingFloorsTilesRes[building.type];
+
+  const handleChangeFloorColor = useCallback(
+    (floorUuid: string, color: string) => {
+      setFloorColor(building.uuid, floorUuid, color as Color);
+    },
+    [building.uuid, setFloorColor],
+  );
 
   const floorsList = Object.values(building.floors).map((floor, i, arr) => {
     const floorTiles = tiles[floor.color];
@@ -48,8 +56,8 @@ const BuildingItem: React.FC<ComponentProps> = ({ building, active }) => {
         key={floor.uuid}
         floor={floor}
         tileRes={tileRes}
-        buildingName={building.name}
         tileImgWidth={tiles.tileImgWidth}
+        onChangeFloorColor={handleChangeFloorColor}
       />
     );
   });
