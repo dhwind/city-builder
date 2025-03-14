@@ -1,69 +1,57 @@
-# City Builder Project
+# City Builder
 
-## Task Breakdown
+![Video](docs/demo-screenshot.png)
 
-### 1. Project Setup
+City Builder is a project that allows users to manage and visualize a city with various buildings. Users can customize buildings, view them in a content block, and simulate weather conditions for the selected city.
 
-- Initialize Next.js project
-- Set up Tailwind CSS
-- Configure React Query
-- Set up Git repository
-- Create initial project structure
+Check out the demo [here](https://city-builder-7jcd.vercel.app/).
 
-**Estimated Time:** 2 hours
+## Features
 
-### 2. Customize Houses
+- **Builder Cards**: Manage every building with options to set the number of floors, color, and building type.
+- **Content Block**: Display all the buildings in a visual format.
+- **Weather Simulation**: Simulate weather conditions and fetch real-time weather and temperature data for the selected city.
 
-- Create bulding cards
-- Create buildings content blocks
-- Draw buildings (pixel art)
-- Implement functionality to adjust attributes like color, number of floors, floors color, building type and name
-- Add form validation (min max floors, etc.)
+## Getting Started
 
-**Estimated Time:** 6 hours
+### Prerequisites
 
-### 3. Manage Houses
+- Node.js version `>=22.13.8`
+- pnpm (Package Manager)
 
-- Implement functionality to add new houses
-- Implement functionality to change using drag & drop building/cards position
-- Implement functionality to remove houses
-- Use state manager to save the current state of the application
+### Installation
 
-**Estimated Time:** 6 hours
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/dhwind/city-builder.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd city-builder
+   ```
+3. Install the dependencies:
+   ```sh
+   pnpm install
+   ```
 
-### 4. Display Weather
+### Running the Project
 
-- Draw weather (sun, rain, snow, day, night) (pixel art)
-- Integrate weather API to fetch current weather data based on selected location (Sofia, New York, Tokyo)
-- Create components to display weather state (sun, rain, snow, day, night)
-- Display current temperature
+To start the development server, run:
 
-**Estimated Time:** 7 hours
+```sh
+pnpm build && pnpm start
+```
 
-### 5. Performance & Scalability
+## Usage
 
-- Optimize components for performance
-- Ensure scalability of the solution
+1. **Manage Buildings**: Use the builder cards to add, edit, or remove buildings. Customize each building by setting the number of floors, color, and type.
+2. **View Buildings**: The content block will display all the buildings you have added.
+3. **Weather Simulation**: Select a city to fetch and display real-time weather and temperature data. Use the weather simulation feature to see how different weather conditions affect your city.
 
-**Estimated Time:** 3 hours
+## Contributing
 
-### 6. Browser Compatibility
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-- Test and ensure compatibility with the last two versions of modern browsers
+## License
 
-**Estimated Time:** 2 hours
-
-### 7. Documentation
-
-- Write documentation for the project
-- Include instructions on how to set up and run the project
-
-**Estimated Time:** 2 hours
-
-### 8. Write Tests
-
-- Write and include tests to ensure the reliability of the solution
-
-**Estimated Time:** 3 hours
-
-## Total Estimated Time: 31 hours
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
