@@ -4,4 +4,4 @@ const weatherApiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_WEATHER_API_URL,
 });
 
-export default weatherApiClient;
+export { weatherApiClient };

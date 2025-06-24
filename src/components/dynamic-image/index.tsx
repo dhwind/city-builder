@@ -28,6 +28,10 @@ const DynamicImage: React.FC<DynamicImageProps> = ({
     <LoaderLayout isLoading={!image || !alt}>
       <Image
         className={className}
+        style={{
+          minWidth: width,
+          minHeight: height,
+        }}
         src={image}
         alt={alt}
         width={width}

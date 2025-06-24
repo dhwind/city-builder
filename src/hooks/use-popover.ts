@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 const usePopover = () => {
@@ -22,4 +24,4 @@ const usePopover = () => {
   };
 };
 
-export default usePopover;
+export { usePopover };

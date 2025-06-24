@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { builderConfig } from '@/config/builder';
+import { builderConfig } from '@/features/builder/config';
 
 const builderSchema = {
   name: z

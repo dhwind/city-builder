@@ -1,13 +1,14 @@
+'use client';
+
 import { memo, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { Floor } from '@/types/builder';
+import { Floor } from '@/features/builder/types';
 import DynamicImage from '@/components/dynamic-image';
 import PopoverAtCoordinates from '@/layouts/popover-at-coordinates';
 import SelectDropdown from '@/components/select-dropdown';
-import { builderConfig } from '@/config/builder';
-import { SelectableItem } from '@/types/common';
-import usePopover from '@/hooks/use-popover';
-import { useHover } from '@/hooks/use-hover';
+import { builderConfig } from '@/features/builder/config';
+import { SelectableItem } from '@/types';
+import { useHover, usePopover } from '@/hooks';
 
 type ComponentProps = {
   floor: Floor;

@@ -1,8 +1,10 @@
+'use client';
+
 import { RefObject, useEffect, useState } from 'react';
 
-export function useHover<T extends HTMLElement = HTMLElement>(
+const useHover = <T extends HTMLElement = HTMLElement>(
   elementRef: RefObject<T | null>,
-): boolean {
+): boolean => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   useEffect(() => {
@@ -23,4 +25,6 @@ export function useHover<T extends HTMLElement = HTMLElement>(
   }, [elementRef]);
 
   return isHovered;
-}
+};
+
+export { useHover };

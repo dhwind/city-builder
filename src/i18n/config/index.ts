@@ -1,4 +1,4 @@
-import { Language } from '@/types/i18n';
+import { Language } from '../types';
 
 type LanguageConfig = {
   languages: Language[];

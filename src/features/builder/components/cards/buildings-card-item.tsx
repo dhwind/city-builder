@@ -1,3 +1,5 @@
+'use client';
+
 import { Trash2 } from 'lucide-react';
 import { SquarePen } from 'lucide-react';
 import { memo, useCallback, useRef } from 'react';
@@ -6,17 +8,17 @@ import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useShallow } from 'zustand/react/shallow';
 import { Button } from '@/components/ui/button';
-import { Building, BuildingType, Color } from '@/types/builder';
+import { Building, BuildingType, Color } from '@/features/builder/types';
 import { Input } from '@/components/ui/input';
-import { builderSchema } from '@/validation/builder';
-import { useDebounce } from '@/hooks/use-debounce';
+import { builderSchema } from '@/features/builder/validation/builder';
+import { useDebounce } from '@/hooks';
 import { formatDate } from '@/utils/date';
 import { ParsedError, parseError } from '@/utils/error';
 import SelectDropdown from '@/components/select-dropdown';
-import { builderConfig } from '@/config/builder';
-import { SelectableItem } from '@/types/common';
+import { builderConfig } from '@/features/builder/config';
+import { SelectableItem } from '@/types';
 import SortableItem from '@/layouts/sortable-item';
-import { useBuilderStore } from '@/store/builder';
+import { useBuilderStore } from '@/features/builder/store/builder';
 import { Slider } from '@/components/ui/slider';
 
 type ComponentProps = {

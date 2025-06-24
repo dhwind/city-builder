@@ -1,19 +1,14 @@
-import { useShallow } from 'zustand/react/shallow';
 import { useTranslations } from 'next-intl';
-import { useWeatherStore } from '@/store/weather';
 import DynamicImage from '@/components/dynamic-image';
-import { weatherConfig } from '@/config/weather';
+import { weatherConfig } from '@/features/weather/config';
+import { useWeather } from '../hooks';
 
 const WeatherTemperature: React.FC = () => {
   const t = useTranslations('weather');
 
-  const { currentTemperature } = useWeatherStore(
-    useShallow(state => ({
-      currentTemperature: state.currentTemperature,
-    })),
-  );
+  const { currentWeather } = useWeather();
 
-  if (!currentTemperature || !currentTemperature.value) {
+  if (!currentWeather || !currentWeather.temperature) {
     return null;
   }
 
@@ -21,10 +16,13 @@ const WeatherTemperature: React.FC = () => {
     <div className="flex gap-x-1">
       <div>
         <DynamicImage
-          src={weatherConfig.temperature[currentTemperature?.range]?.resource}
+          src={
+            weatherConfig.temperature[currentWeather?.temperature?.range]
+              ?.resource
+          }
           alt="thermometer"
           width={20}
-          height={60}
+          height={40}
         />
       </div>
       <span
@@ -32,7 +30,7 @@ const WeatherTemperature: React.FC = () => {
         style={{ fontFamily: 'var(--font-silkscreen)' }}
       >
         {t('metrics.celsius', {
-          temperature: currentTemperature?.value,
+          temperature: currentWeather?.temperature?.value,
         })}
       </span>
     </div>

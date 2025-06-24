@@ -1,9 +1,9 @@
 import { CloudRain, CloudSnow, LucideProps, Sun } from 'lucide-react';
 import { ForwardRefExoticComponent, RefAttributes } from 'react';
-import { Weather } from '@/types/weather';
+import { WeatherType, Weather, LocationCity } from '../types';
 
 type WeatherTypeConfig = {
-  id: Weather;
+  id: WeatherType;
   Icon: ForwardRefExoticComponent<
     Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
   >;
@@ -19,7 +19,7 @@ type WeatherTemperatureRange = {
 
 type WeatherConfig = {
   types: WeatherTypeConfig[];
-
+  defaultWeather: Weather;
   temperature: {
     frozen: WeatherTemperatureRange;
     low: WeatherTemperatureRange;
@@ -28,13 +28,13 @@ type WeatherConfig = {
     hot: WeatherTemperatureRange;
   };
   location: {
-    default: string;
+    default: LocationCity;
     items: WeatherLocation[];
   };
 };
 
 type WeatherLocation = {
-  id: string;
+  id: LocationCity;
 };
 
 const weatherConfig: WeatherConfig = {
@@ -52,6 +52,14 @@ const weatherConfig: WeatherConfig = {
       Icon: CloudSnow,
     },
   ],
+  defaultWeather: {
+    temperature: {
+      value: 0,
+      range: 'normal',
+    },
+    unit: 'metric',
+    type: 'clear-sky',
+  },
   temperature: {
     frozen: {
       resource: 'weather/temperature/thermometer-frozen.png',

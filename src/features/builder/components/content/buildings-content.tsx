@@ -2,30 +2,22 @@
 
 import { useTranslations } from 'next-intl';
 
-import '@/styles/buildings.css';
+import '../../styles/index.css';
 import { useShallow } from 'zustand/react/shallow';
 import { useEffect, useRef, useState } from 'react';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { useBuilderStore } from '@/store/builder';
+import { useBuilderStore } from '@/features/builder/store/builder';
 import DndSort from '@/layouts/dnd-sort';
-import {
-  WeatherLocation,
-  WeatherPanel,
-  WeatherTemperature,
-} from '@/features/weather';
-import { useWeatherStore } from '@/store/weather';
+import { WeatherContainer } from '@/features/weather';
 import { cn } from '@/lib/utils';
 import BuildingItem from './building-item';
+import { useWeather } from '@/features/weather/hooks';
 
 const BuildingsContent: React.FC = () => {
   const t = useTranslations('builder');
-  const { currentWeather, pending } = useWeatherStore(
-    useShallow(state => ({
-      currentWeather: state.currentWeather,
-      pending: state.pending,
-    })),
-  );
+
+  const { currentWeather, isWeatherLoading } = useWeather();
 
   const { buildings, sortBuildings } = useBuilderStore(
     useShallow(state => ({
@@ -67,16 +59,10 @@ const BuildingsContent: React.FC = () => {
         <div
           className={cn(
             'h-[660px] max-h-[660px] relative',
-            !pending ? `background-image-${currentWeather}` : '',
+            !isWeatherLoading ? `background-image-${currentWeather?.type}` : '',
           )}
         >
-          <div className="absolute right-3 md:right-auto md:left-3 top-3 z-50">
-            <WeatherTemperature />
-          </div>
-          <div className="flex flex-col items-start gap-2 absolute left-3 md:flex-row md:items-center md:left-auto md:right-5 top-3 z-50">
-            <WeatherLocation />
-            <WeatherPanel />
-          </div>
+          <WeatherContainer />
           <div className="scrollable-container scrollbar-thin">
             <DndSort
               items={buildingsUuids}

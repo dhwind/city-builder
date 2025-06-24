@@ -1,5 +1,5 @@
-import { BuildingType, Color } from '@/types/builder';
-import { SelectableItem } from '@/types/common';
+import { BuildingType, Color } from '@/features/builder/types';
+import { SelectableItem } from '@/types';
 
 type ConfigField = {
   min: {

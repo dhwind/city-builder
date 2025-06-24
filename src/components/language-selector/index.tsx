@@ -2,11 +2,11 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import DynamicImage from '../dynamic-image';
-import { Language } from '@/types/i18n';
 import SelectDropdown from '@/components/select-dropdown';
-import { languagesConfig } from '@/config/i18n';
+import { languagesConfig } from '@/i18n/config';
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { SelectableDropdownItem } from '@/types/common';
+import { SelectableDropdownItem } from '@/types';
+import { Language } from '@/i18n/types';
 
 const LanguageSelector: React.FC = () => {
   const router = useRouter();

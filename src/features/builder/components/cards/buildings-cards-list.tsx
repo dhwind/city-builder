@@ -8,11 +8,11 @@ import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useShallow } from 'zustand/react/shallow';
 import { Button } from '@/components/ui/button';
 import { generateUUID } from '@/utils/uuid';
-import { builderConfig } from '@/config/builder';
+import { builderConfig } from '@/features/builder/config';
 import LoaderLayout from '@/layouts/loader';
 import DndSort from '@/layouts/dnd-sort';
-import { useBuilderStore } from '@/store/builder';
-import { Floor } from '@/types/builder';
+import { useBuilderStore } from '@/features/builder/store/builder';
+import { Floor } from '@/features/builder/types';
 import { arrayToRecord } from '@/utils/store';
 import BuildingsCardItem from './buildings-card-item';
 

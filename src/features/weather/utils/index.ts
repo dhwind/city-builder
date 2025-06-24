@@ -1,7 +1,7 @@
-import { weatherConfig } from '@/config/weather';
-import { Weather, WeatherTemperatureRangeType } from '@/types/weather';
+import { weatherConfig } from '../config';
+import { WeatherType, WeatherTemperatureRangeType } from '../types';
 
-const getWeatherType = (code: number): Weather => {
+const getWeatherType = (code: number): WeatherType => {
   if (code >= 200 && code < 600) {
     return 'rain';
   } else if (code >= 600 && code < 700) {

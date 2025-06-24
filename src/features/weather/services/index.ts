@@ -1,11 +1,6 @@
-import weatherApiClient from '@/lib/api/weather-api-client';
-import {
-  WeatherQueryParams,
-  WeatherQueryResponse,
-  WeatherUnit,
-} from '@/types/weather';
-import { generateQueryString } from '@/utils/api';
-import { getWeatherType } from '@/utils/weather';
+import { weatherApiClient } from '../api';
+import { WeatherQueryParams, Weather, WeatherUnit } from '../types';
+import { getWeatherType, getTemperatureRange } from '../utils';
 
 type OpenWeatherForecastParams = {
   q: string;
@@ -73,7 +68,7 @@ type OpenWeatherForecastResponse = {
 
 const fetchLocationWeather = async (
   params: WeatherQueryParams,
-): Promise<WeatherQueryResponse> => {
+): Promise<Weather> => {
   try {
     const unit = params.unit || 'standard';
     const openWeatherForecastParams: OpenWeatherForecastParams = {
@@ -83,17 +78,22 @@ const fetchLocationWeather = async (
       lang: params.lang,
     };
 
-    const queryString = generateQueryString(openWeatherForecastParams);
+    const queryString = new URLSearchParams(openWeatherForecastParams);
 
     const response = await weatherApiClient.get<OpenWeatherForecastResponse>(
-      `/data/2.5/forecast?${queryString}`,
+      `/data/2.5/forecast?${queryString.toString()}`,
     );
 
     const responseData = response.data;
 
-    const result: WeatherQueryResponse = {
-      temperature: Math.round(responseData.list[0].main.temp),
-      weather: getWeatherType(responseData.list[0].weather[0].id),
+    const temperatureData = {
+      value: Math.round(responseData.list[0].main.temp),
+      range: getTemperatureRange(responseData.list[0].main.temp),
+    };
+
+    const result: Weather = {
+      temperature: temperatureData,
+      type: getWeatherType(responseData.list[0].weather[0].id),
       unit,
     };
 

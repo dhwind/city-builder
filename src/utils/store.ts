@@ -1,4 +1,4 @@
-import { Store } from '@/types/store';
+import { Store } from '@/types';
 
 type PartialParam<T> = T | Partial<T> | ((state: T) => T | Partial<T>);
 

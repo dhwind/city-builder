@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { Building, Color } from '@/types/builder';
-import { Store } from '@/types/store';
+import { Building, Color } from '@/features/builder/types';
+import { Store } from '@/types';
 import { createStateObj } from '@/utils/store';
 import { generateUUID } from '@/utils/uuid';
 

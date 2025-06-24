@@ -1,15 +1,17 @@
+'use client';
+
 import { memo, useCallback, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import { Building, Color } from '@/types/builder';
-import { buildingFloorsTilesRes } from '@/config/builder';
+import { Building, Color } from '@/features/builder/types';
+import { buildingFloorsTilesRes } from '@/features/builder/config';
 import SortableItem from '@/layouts/sortable-item';
-import { useBuilderStore } from '@/store/builder';
+import { useBuilderStore } from '@/features/builder/store/builder';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/utils/date';
-import { useHover } from '@/hooks/use-hover';
+import { useHover } from '@/hooks';
 import BuildingFloor from './building-floor';
 
 type ComponentProps = {

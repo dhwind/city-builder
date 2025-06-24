@@ -10,7 +10,9 @@ const Header: React.FC = () => {
         <Link href="/">
           <Image src={logoSrc} alt="logo" width={200} height={54} priority />
         </Link>
-        <LanguageSelector />
+        <div className="hidden md:block">
+          <LanguageSelector />
+        </div>
       </div>
     </header>
   );

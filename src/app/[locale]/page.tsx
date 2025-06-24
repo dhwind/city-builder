@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import Builder from '@/features/builder';
+import { BuilderContainer } from '@/features/builder/components';
 
 type Params = {
   params: Promise<{ locale: string }>;
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Params): Promise<{
 const Home: React.FC = () => {
   return (
     <div className="w-full flex flex-col">
-      <Builder />
+      <BuilderContainer />
     </div>
   );
 };

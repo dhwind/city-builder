@@ -1,7 +1,7 @@
 .ground-bg {
   width: 100%;
   min-height: 150px;
-  background: url('../assets/city/other/ground.png') repeat;
+  background: url('../../../assets/city/other/ground.png') repeat;
 }
 
 .scrollable-container {
@@ -12,19 +12,19 @@
 }
 
 .background-image-clear-sky {
-  background: url('../assets/weather/background/clear-sky.gif') no-repeat;
+  background: url('../../../assets/weather/background/clear-sky.gif') no-repeat;
   background-size: cover;
   background-position: 25% 55%;
 }
 
 .background-image-rain {
-  background: url('../assets/weather/background/rain.gif') no-repeat;
+  background: url('../../../assets/weather/background/rain.gif') no-repeat;
   background-size: cover;
   background-position: 25% 55%;
 }
 
 .background-image-snow {
-  background: url('../assets/weather/background/snow.gif') no-repeat;
+  background: url('../../../assets/weather/background/snow.gif') no-repeat;
   background-size: cover;
   background-position: 25% 55%;
 }

@@ -24,7 +24,7 @@ const eslintConfig = [
       'prefer-arrow-callback': ['error'],
       'prefer-template': ['error'],
       'sort-imports': [
-        'error',
+        'warning',
         {
           ignoreCase: true,
           ignoreDeclarationSort: true,

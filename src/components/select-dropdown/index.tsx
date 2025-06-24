@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SelectableDropdownItem } from '@/types/common';
+import { SelectableDropdownItem } from '@/types';
 
 type SelectProps = {
   items: SelectableDropdownItem[];

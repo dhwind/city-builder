@@ -1,3 +1,5 @@
+'use client';
+
 import { UseMutationResult } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
@@ -22,4 +24,4 @@ const useMutationStatus = <
   return isPending;
 };
 
-export default useMutationStatus;
+export { useMutationStatus };
