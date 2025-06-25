@@ -37,12 +37,15 @@ const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex flex-col gap-2 md:items-center md:flex-row">
       <span className="whitespace-nowrap text-sm">{t('selectLanguage')}</span>
       <SelectDropdown
         items={locationItems}
         defaultValue={currentLanguage}
-        className={{ trigger: 'min-w-none', content: 'min-w-none' }}
+        className={{
+          trigger: 'max-w-32 min-w-none',
+          content: 'max-w-32 min-w-none',
+        }}
         onSelect={handleChangeLanguage}
       />
     </div>

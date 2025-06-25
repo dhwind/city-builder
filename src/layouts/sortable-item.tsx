@@ -1,5 +1,5 @@
 import { useSortable } from '@dnd-kit/sortable';
-import { GripVertical } from 'lucide-react';
+import { GripVertical, GripHorizontal } from 'lucide-react';
 import { CSS } from '@dnd-kit/utilities';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -89,7 +89,7 @@ const SortableItem: React.FC<ComponentProps> = ({
               {...attributes}
               {...listeners}
             >
-              <GripVertical className="stroke-gray-500" size={24} />
+              <GripHorizontal className="stroke-gray-500" size={24} />
             </Button>
           </div>
         ) : null}

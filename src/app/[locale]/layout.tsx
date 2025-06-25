@@ -36,7 +36,7 @@ const RootLayout: React.FC<RootLayoutProps> = async ({ children, params }) => {
             className={cn(roboto.variable, silkscreen.variable, 'antialiased')}
           >
             <Header />
-            <main className="w-full p-3 flex justify-center items-center md:px-12 md:py-6">
+            <main className="w-full md:p-3 flex justify-center items-center md:px-12 md:py-6">
               <div className="w-full max-w-screen-2xl">{children}</div>
             </main>
             <Toaster />
